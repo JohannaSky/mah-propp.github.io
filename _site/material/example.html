@@ -63,6 +63,73 @@
         
             <h1 id="introduktion">Introduktion</h1>
 
+<h2 id="rubrikniv-2">Rubriknivå 2</h2>
+
+<p>Lorem ipsum dolor sit amet, <em>kursiv text</em> consectetur adipiscing elit, <strong>fetstilad text</strong> sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+<h3 id="rubrikniv-3">Rubriknivå 3</h3>
+
+<p>Lorem ipsum dolor sit amet, <code class="highlighter-rouge">en bit kod i löpande text</code> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+<ul>
+  <li>Punktlista 1</li>
+  <li>Punktlista 2
+    <ul>
+      <li>Punktlista i en lista</li>
+    </ul>
+  </li>
+  <li>Punktlista 3</li>
+</ul>
+
+<ol>
+  <li>Numrerad lista 1</li>
+  <li>Numrerad lista 2
+    <ol>
+      <li>Numrerad lista i en lista</li>
+    </ol>
+  </li>
+  <li>Numrerad lista 3</li>
+</ol>
+
+<p>Lorem ipsum dolor sit amet, <a href="http://google.com">Google</a> adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+<div class="video">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/QUIfNNfgXnU" frameborder="0" allowfullscreen=""></iframe>
+</div>
+
+<h4 id="kodexempel">Kodexempel</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">// en simpel funktion som kollar om ett tal är noll
+</span><span class="n">bool</span> <span class="nf">iszero</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">bool</span> <span class="n">iszero</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// anta att val inte är noll
+</span>	<span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="n">iszero</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// status blir true om val är noll
+</span>	<span class="k">return</span> <span class="n">iszero</span><span class="p">;</span>		
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(),</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="c1">// två slumpade värden
+</span>	
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">iszero</span><span class="p">(</span><span class="n">val2</span><span class="p">))</span> <span class="c1">// tänk på !
+</span>	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">val1</span> <span class="o">/</span> <span class="n">val2</span><span class="p">;</span> <span class="c1">// dela endast om val2 är annorlunda än 0
+</span>	<span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="vningsfrga">Övningsfråga</h4>
+
+<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat?</p>
+
+<p class="spoiler">Lorem ipsum dolor sit amet, <code class="highlighter-rouge">en bit kod i löpande text</code> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+<h4 id="bildexempel">Bildexempel</h4>
+
+<p><img src="images/example.png" alt="Bildbeskrivning" /> <em>1. Bildexempel</em></p>
+
         
 
         

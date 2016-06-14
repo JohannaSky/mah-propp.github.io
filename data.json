@@ -1,0 +1,30 @@
+---
+---
+{
+    "material": [
+        {% for m in site.data.material %}
+        {
+            "id": "{{ m.id }}",
+            "name": "{{ m.name }}",
+            "quiz": "{{ m.quiz }}"
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ],
+    "answers": [
+        {% for quiz_hash in site.data.quiz %}
+        {% assign quiz = quiz_hash[1] %}
+        {
+            "id": "{{ quiz.id }}",
+            "level": {% if quiz.level %}{{ quiz.level }}{% else %}100{% endif %},
+            "answers": [
+                {% for answer in quiz.answers %}
+                {
+                    "type": "{{ answer.type }}",
+                    "correct": {% if answer.type == "radio" %}"{{ answer.correct }}"{% else %}[{% for c in answer.correct %}"{{ c }}"{% unless forloop.last %},{% endunless %}{% endfor %}]{% endif %}
+                }{% unless forloop.last %},{% endunless %}
+                {% endfor %}
+            ]
+        }{% unless forloop.last %},{% endunless %}
+        {% endfor %}
+    ]
+}

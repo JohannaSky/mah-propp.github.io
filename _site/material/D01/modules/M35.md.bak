@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>jämförelse C++/C# | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <p>#Jämförelse mellan C++ och C#</p>
+
+<p>##Arv:</p>
+
+<p>###C++
+Klasser och structar är i princip samma sak.</p>
+
+<p>###C#
+Klasser kan implementera vilka antal av interface som helst,
+men kan endast ärva av en basklass.
+Structar stödjer inte arv och inte heller explecita default konstruktorer.</p>
+
+<p>##Arrayer:</p>
+
+<p>###C++
+Arrayer är i princip endast en pekare.
+Syntaxen ser något annorlunda ut ([] ligger efter variabelnamnet).</p>
+
+<p>###C#
+Arrayer är objekt som inkluderar metoder och properties</p>
+
+<p>##Booleans:</p>
+
+<p>###C++
+Är i princip ett heltal.</p>
+
+<p>###C#
+Ingen konvertering mellan en booltyp och en annan typ.</p>
+
+<p>##Argument:</p>
+
+<p>###C++
+Alla varibaler skickas som värde om man inte explecit skickar det som en pekare/referens.</p>
+
+<p>###C#
+Klasser skickas som referens och struct som värde, om man inte explecit skickar som referens via ref/out-parametern.</p>
+
+<p>##Switch sats:</p>
+
+<p>###C++
+Måste explecit bryta mellan ett fall till ett annat, annars körs även nästa fall.</p>
+
+<p>###C#
+Bryter automatiskt efter ett fall.</p>
+
+<p>##Delegates:</p>
+
+<p>###C++
+I C++ finns inte delegates, men man kan åstakomma det på flera olika sätt (t.ex. via funktionspekare).</p>
+
+<p>###C#
+Delegates är delegates :)</p>
+
+<p>##Bas-klass</p>
+
+<p>###C#
+C# nyttjar nyckelorden base (kalla på de överlagrade basklass medlemmarna från den härledda klassen.
+Sedan skriver man också explicit ut override-nyckelordet för virtuella och abstrakta metoder.</p>
+
+<p>##Strängar</p>
+
+<p>###C# 
+Strängar i C# är objekt med robusta sökmetoder.</p>
+
+<p>###C++ 
+Stränar i C++ är endast en array av chars.</p>
+
+<p>##variabler och metoder</p>
+
+<p>###C#
+Globala variabler och metoder finns inte i C#.
+Metoder och variabler måste finnas i en klass eller struct.</p>
+
+<p>###C++
+I C++ får man ha globala variabler och metoder (funktioner).</p>
+
+<p>##Garbage Collector</p>
+
+<p>###C#
+C# är ett “garbage collected” språk, vilket betyder att minne frigörs automatiskt när ett objkt inte används längre.</p>
+
+<p>###C++ 
+C++ är inget “garbage collected” språk. Minne som inte explicit frigörs ligger allokerat tills processen stängs.</p>
+
+<p>##Diverse
+<strong>C#</strong> nyttjar new-nyckelordet för att explicit gömma en arvd medlemm.</p>
+
+<p><strong>C++</strong> gör detta implicit via arv.</p>
+
+<p><strong>C++</strong> använder så kallade h-filer vilket C# inte gör.</p>
+
+<p><strong>C#</strong> har utöver “vanliga” operatorer andra som t.ex. is och typeof.
+Det finns alltså inte i C++.</p>
+
+<p><strong>C#</strong> using kan användas för att skapa kortare eller bättre namn för typer som redan har deklarerats.
+I C++ heter detta typedef.</p>
+
+<p><strong>C#</strong> Main-metoden i C# är alltid statisk och nytjar stort M.
+I C++ heter den ofast main med litet m.</p>
+
+<p><strong>Pekare</strong> finns endast i osäkert-läge i C# medans i C++ används det mycket :)</p>
+
+<p><strong>Lokala variabler</strong> kan inte användas i C# förrän de är initierade.</p>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Räkna upp några skillnader mellan C++ och C#/Java</p>
+
+<ol class="alternatives multiple">
+  <li>I C++ hanterar man minnet själv, C#/Java har garbage collector.</li>
+  <li>C++ kan ha flera basklasser (multipelt arv). <br />C#/Java har interface i stället.</li>
+  <li>I C++ kan man hantera objekt som värden eller med pekare. <br />C#/Java hanterar alltid objekten med referenser (som är en sorts dolda pekare).</li>
+  <li>I C++ kan man hantera de grundläggande datatyperna (integer, char etc.) som värden eller med pekare. <br />C#/Java hanterar alltid dessa som värden.</li>
+  <li>I C++ finns det globala funktioner som inte finns i någon klass.</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q35">
+                    <input type="hidden" name="module-id" id="module-id" value="M35">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

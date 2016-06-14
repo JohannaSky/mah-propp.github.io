@@ -1,0 +1,269 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>preprocessor | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <p>#M39: Kompilator och länkning - preprocessor</p>
+
+<p>Prepcrosseor-direktiv är rader som finns i programkoden som ligger efter hash-tecknet (#)</p>
+
+<p>Dessa rader är inte programsatser utan endast till för preprocessorn.
+Vad är då preprocessorn?
+Preprocessorn kontrollerar koden innan kompileringen börjar och tar hand om alla preprocessor-direktiv som finns i koden innan all annan kod genereras utifrån vanliga satser.
+Det finns olika typer av direktiv, nedan kan man läsa mer om dem.</p>
+
+<p>Preprocessor-direktiven finns endast på en rad fram tills att en ny rad börjar.
+Därför använd inte semikolon i slutet av ett preprocessor-direktiv.
+Man kan ha ett preprocessor-direktiv på flera rader om man lägger till ett backslash-tecken () i slutet av raden.</p>
+
+<p>Olika preprocessor-direktiv</p>
+
+<p><strong>Macros</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="cp">#define</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Syntax</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="cp">#define identifierare ersättning</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>När preprocessorn ser ett sådant direktiv ersätts alla förekomster av identifieraren i resten av koden med ersättningen.
+Ersättningen kan vara ett uttryck, en sats, ett block, eller liknande.
+Preprocessorn ersätter helt enkelt identifieraren utan att bry sig om möjliga C++-regler.</p>
+
+<p><strong>Kodexempel</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="cp">#define TABLE_SIZE 100
+</span><span class="kt">int</span> <span class="n">table1</span><span class="p">[</span><span class="n">TABLE_SIZE</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">table2</span><span class="p">[</span><span class="n">TABLE_SIZE</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Efter att preprocessorn gått igenom koden blir resultatet:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">table1</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span>
+<span class="kt">int</span> <span class="n">table2</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det finns också ett #undef-direktiv som avdefinerar något som är definerat.</p>
+
+<p><strong>Vilkorlig inkludering</strong></p>
+
+<p>#ifdef, #ifndef, #endif</p>
+
+<p>Dessa direktiv kan möjliggöra att man inkluderar eller exkluderar programkod när ett visst vilkor är uppfyllt.</p>
+
+<p>#ifdef kan nyttjas vid i koden om man till exempel vill exekvera något annorlunda i debug-läge än om man kör i release-läge.
+#endif-direktivet avsultar i det här fallet #ifdef-direktivet.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre>	<span class="kt">int</span> <span class="n">debugFlag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="cp">#ifdef DEBUG_
+</span>	<span class="n">debugFlag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// den här kodraden kommer endast att köras om DEBUG_ är definerat (det är det om man kör i debug-läge)
+</span><span class="cp">#endif // avslutar #ifdef</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>#ifndef kan användas om något inte har blivit definerat.
+Koden mellan #ifndef och #endif om en identifierare inte tidigare blivit definerat.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="cp">#ifndef SOME_DEFINE
+#define SOME_DEFINE
+</span><span class="cm">/* Gör någonting */</span>
+<span class="cp">#endif</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Skulle det här kodstycket ovan exekveras igen kommer inte koden /* Gör någonting */ att exekveras eftersom SOME_DEFINE redan är definerat.</p>
+
+<p>Är man mer intresserad kan man också titta på direktiven:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="cp">#if, #else, #elif</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Källfilsinkludering</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="cp">#include</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Preprocessorn ersätter include-direktivet med hela innehållet i en specifik header eller fil (filen som är definierad mellan &lt;&gt; eller “”).
+Det finns två sätt att använda #include på, med vinkelparanteser eller citattecken:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="cp">#include &lt;header&gt;
+#include "file" </span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Skillnaden är var preprocessorn ska leta efter filen.
+Använder man vinkelparanteser letar preprocessorn efter filen i sökvägar som ligger fördefinerat, som till exempel header-filer för standardbiblioteket.
+Nyttjas citattecken letar preprocessorn efter filerna i aktuell katalog (aktuell katalog för projektet i Visual Studio till exempel).</p>
+
+<p><strong>Pragma-direktiv</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="cp">#pragma</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Platforms- och kompileringsspecifika direktiv.
+Läs beskrivning för den kompilator som ska nyttjas.</p>
+
+<p>Ett vanligt pragma-direktiv är</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="c1">//File.h
+</span><span class="cp">#pragma once
+</span><span class="cm">/* kod */</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det här direktivet kan användas när man vill inkludera en specifik källfil endast en gång vid en kompilering.</p>
+
+<p>Istället för pragma once (som kanske inte stöds i alla kompilatorer) kan man nyttja vilkorlig inkludering (det ger samma resultat).</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6</pre></td><td class="code"><pre>	
+<span class="c1">//File.h
+</span><span class="cp">#ifndef FILE_H
+#define FILE_H
+</span><span class="cm">/*kod */</span>
+<span class="cp">#endif</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h2 id="frdefinerade-macron"><strong>Fördefinerade macron</strong></h2>
+<p>Vid kompilering kan man få ut följande information med fördefinerade macron:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre>		
+<span class="n">__LINE__</span>	<span class="c1">// heltalsvärde som representerar aktuell rad i källkodsfilen
+</span><span class="n">__FILE__</span>	<span class="c1">// sträng som innehåller namnet för källkodsfilen
+</span><span class="n">__DATE__</span>	<span class="c1">// sträng som innehåller datum i formatet "M mm dd yyyy"
+</span><span class="n">__TIME__</span>	<span class="o">//</span> <span class="n">str</span><span class="err">ä</span><span class="n">ng</span> <span class="n">som</span> <span class="n">inneh</span><span class="err">å</span><span class="n">ller</span> <span class="n">tiden</span> <span class="n">i</span> <span class="n">formatet</span> <span class="s">"hh:mm:ss"</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+
+        
+
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

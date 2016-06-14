@@ -1,0 +1,337 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Introduktion till referenser | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.tutorialspoint.com/cplusplus/cpp_references.htm">C++ references</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduktion-till-referenser">Introduktion till referenser</h1>
+
+<p>Referenserna fungera som in- och ut-parameter, det vill säga att objektet som kommer in i funktionen ändras parmament även utanför.</p>
+
+<p>Skickar man ett objekt som värde istället för referens (eller pekare) till en funktion, kommer en kopia av objektet att skapas som man då istället ändrar på.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">Func</span><span class="p">(</span><span class="kt">int</span> <span class="n">as_value</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">as_ref</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">as_value</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="n">as_ref</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+
+    <span class="n">Func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+    <span class="c1">// a är fortfarande 5
+</span>    <span class="c1">// b ändras och är nu 10
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Referenser nyttjas ofta som funktionsparametrar när en funktion ska kunna returnera flera värden. En funktions retur-anrop kan endast returnera ett objekt, och man vill flera gånger kunna returnera flera olika objekt.</p>
+
+<p>I kodexempel B fungerar den tredje funktionsparametern för Divide som en in- och ut-parameter för resultatet av x/y. Returtypen för Divide är en bool, som returnerar false om man försöker dela med noll.</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="n">bool</span> <span class="nf">Divide</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"You cannot divide by zero!"</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">x</span> <span class="o">/</span> <span class="n">y</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">PrintResult</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">,</span> <span class="kt">int</span> <span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">"/"</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="s">" = "</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">Divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Divide returnerar false, PrintResult exekveras ej.
+</span>        <span class="n">PrintResult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">Divide</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span> <span class="p">{</span>
+        <span class="c1">// Divide returnerar true, PrintResult exekveras.
+</span>        <span class="n">PrintResult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Utskrift:</strong></p>
+
+<figure class="highlight"><pre><code class="language-jinja" data-lang="jinja">You cannot divide by zero!
+10/2 = 5</code></pre></figure>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+
+<p>En funktion som multiplicerar ett tal med sig självt ser ut såhär:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">Multiply</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Vad blir värdet för talet <code class="highlighter-rouge">i</code> efter den här operationen:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">Multiply</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p class="spoiler">####Svar:
+MelMelon
+i = 3. För att värdet kopieras eftersom att det inte är en referens.</p>
+
+<p>###Övningsuppgift 2
+Skriv om funktionen i Övningsuppgift 1 så att parametern “value” är en referens. Vad blir resultatet nu?</p>
+
+<p>####Svar:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kt">void</span> <span class="nf">Multiply</span><span class="p">(</span><span class="kt">int</span><span class="o">&amp;</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span> <span class="o">*</span> <span class="n">value</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p class="spoiler"><br />
+<code class="highlighter-rouge">i</code> får värdet 9 efter operationen.</p>
+
+<h3 id="vningsuppgift-3">Övningsuppgift 3</h3>
+
+<p>Funktionen <code class="highlighter-rouge">GetName()</code> ser ut såhär:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">GetName</span><span class="p">()</span> <span class="p">{</span>
+
+    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">res</span> <span class="o">=</span> <span class="s">"Allan"</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">res</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Funktionen returnerar en referens till en sträng. Vad händer när följande operation körs och varför?</p>
+
+<p>std::string myName = GetName();</p>
+
+<p>####Svar:</p>
+
+<p class="spoiler">Programmet kompilerar men crashar under runtime. Detta för att res försvinner när GetName() går ut ur scope medan myName fortfarande refererar till objektet.</p>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<ul>
+  <li>Det är likvärdigt att nyttja en pekare istället för en referens som funktionsparameter. Resultatet blir detsamma!</li>
+  <li>Skulle man behöva skicka in någonting stort som inparameter bör man skicka det som referens, då sker ingen kopiering.</li>
+  <li>Man kan returnera flera värden/objekt från en funktion genom att returnera en struct eller en klass.</li>
+</ul>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Referens-variabeln refVal deklareras och definieras på följande sätt:
+int i = 3;
+int&amp; refVal = i;</p>
+
+<p>Vilken eller vilka av följande operationer är korrekta?</p>
+
+<ol class="alternatives">
+  <li>int&amp; x = refVal;</li>
+  <li>int* x = refVal;</li>
+  <li>int* x = &amp;refVal;</li>
+  <li>int x = &amp;refVal;</li>
+  <li>int x = refVal;</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q1">
+                    <input type="hidden" name="module-id" id="module-id" value="M1">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

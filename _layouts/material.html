@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    {% include head.html %}
+    <body class="module {{ page.class }}">
+        {% include header.html %}
+        {% include sidebars/material.html %}
+        {% include up.html %}
+
+        <div class="content" id="content">
+        {% if page.markdown == 0 %}
+            {{ content }}
+        {% else %}
+            {{ content | markdownify }}
+        {% endif %}
+
+        {% if page.quiz %}
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    {% capture capture_include %}{% include quiz/{{ page.quiz }}.md %}{% endcapture %}
+                    {{ capture_include | markdownify }}
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="{{ page.quiz }}">
+                    <input type="hidden" name="material-id" id="material-id" value="{{ page.id }}">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        {% endif %}
+
+        {% include contribute.html %}
+        </div>
+
+        {% include footer.html %}
+    </body>
+</html>
+

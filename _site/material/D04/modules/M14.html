@@ -1,0 +1,341 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>minnesläckor | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://msdn.microsoft.com/en-us/library/x98tx3cf.aspx">Memory leaks</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="minneslckor">Minnesläckor</h1>
+
+<p>En minnesläcka uppstår när det finns dynamiskt allokerat minne som inte frigjorts, samtidigt som ingen pekare till minnesplatsen finns kvar. 
+Man kan alltså inte komma åt minnesplatsen längre, fast att den fortfarande är allokerad.</p>
+
+<p>När minne allokeras med new-operatorn bör man innan programmet stängs avallokerar det med delete eller delete[]. 
+delete[] använder man om man ska frigöra en dynamisk allokerad array.</p>
+
+<p>To make it possible to find memory leaks a program normally deallocate all memory it is using when closing.
+If there is any memory left allocated you have a memory leak and there exist debugging help to find out
+what type of object is allocated and where in the program this memory was allocated. 
+This is the reason that most programs ends by deallocating all memory even if it takes up unneccessary execution time to do it.</p>
+
+<p>Inside the program deallocated memory can be reused when allocating new memory.
+But outside the program no memory is deallocated when when deallocating, all the memory will be freed when the program close, 
+when the memroy that is not deallocated inside the program.
+program.</p>
+
+<p>###Film om hur man kan hitta minnesläckor i Visual Studio 2013.##</p>
+
+<iframe width="710" height="400" src="//www.youtube.com/embed/ADMFo1c3IpE?feature=player_embedded" frameborder="0" allowfullscreen=""></iframe>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre>    <span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">persistent_value</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>I kodexempel A allokerar vi ett heltal utan att frigöra det. 
+Minnet kommer automatiskt att frigöras när programmet stängs. 
+Men man bör alltid köra delete på pekaren när man inte behöver minnet längre för att undvika minnesläckor.</p>
+
+<p>I kodexempel B nyttjar vi ett par olika verktyg för att upptäcka minnesläckor när ett program stängs ner. 
+Man får sedan en del information om läckorna från Output-fönstret i Visual Studio när man kör programmet i debug-läge.</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7</pre></td><td class="code"><pre><span class="cp">#include &lt;crtdbg.h&gt;
+</span> 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="n">_CrtSetDbgFlag</span> <span class="p">(</span> <span class="n">_CRTDBG_ALLOC_MEM_DF</span> <span class="o">|</span> <span class="n">_CRTDBG_LEAK_CHECK_DF</span> <span class="p">);</span>
+     
+    <span class="kt">int</span><span class="o">*</span> <span class="n">persistent_value</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Utskrift från Visual Studios Output-fönster</strong></p>
+
+<p class="info">Detected memory leaks!<br />
+Dumping objects -&gt;<br />
+{69} normal block at 0x012A4960, 4 bytes long.<br />
+Data: &lt; &gt; 0F 00 00 00<br />
+Object dump complete.</p>
+
+<p>Här ser man att minnesplatsen 0x012A4960 inte frigjorts, och man har en läcka på 4 bytes. 
+Läckan har ett minnesallokeringsnummer på 69.
+Man ser också att värdet på datan är 0F 00 00 00 (hexadecimalt i little-endian) vilket är 15 i decimaltal.</p>
+
+<p>Skulle man vilja ha mer information, till exempel fil och radnummer för minnesläckan, kan man omdefinera new-operatorn. 
+Hur man gör det kan ni se i kodexempel C.</p>
+
+<p><strong>Kodexempel C</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="c1">// gör det endast för debug-läge
+</span><span class="cp">#ifdef _DEBUG
+</span>   <span class="cp">#ifndef DBG_NEW
+</span>      <span class="cp">#define DBG_NEW new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+</span>      <span class="cp">#define new DBG_NEW
+</span>   <span class="cp">#endif
+#endif  // _DEBUG
+</span> 
+<span class="cp">#include &lt;crtdbg.h&gt;
+</span> 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="n">_CrtSetDbgFlag</span> <span class="p">(</span> <span class="n">_CRTDBG_ALLOC_MEM_DF</span> <span class="o">|</span> <span class="n">_CRTDBG_LEAK_CHECK_DF</span> <span class="p">);</span>
+     
+    <span class="kt">int</span><span class="o">*</span> <span class="n">persistent_value</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Utskrift från Visual Studios Output-fönster</strong></p>
+
+<p class="info">Detected memory leaks!<br />
+Dumping objects -&gt;<br />
+c:\users\ae1842\documents\visual studio 2013\projects\testing\testing\main.cpp(15) : {69} normal block at 0x01404130, 4 bytes long.<br />
+Data: &lt; &gt; 14 00 00 00<br />
+Object dump complete.</p>
+
+<p>Här utläses att på rad 15 i filen main.cpp läcker det 4 bytes på minnesplatsen 0x01404130. 
+Man får alltså specifik information om var minnesläckan kan vara.</p>
+
+<p>Man kan nu även dubbelklicka i Output-fönstret på minnesläckan för att automatiskt hoppa till raden man allokerat minnet på.</p>
+
+<h3 id="vningsuppgift">Övningsuppgift</h3>
+
+<p>Laga minnesläcka i följande kod:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="k">public</span><span class="o">:</span>
+   <span class="n">A</span><span class="p">(){}</span>
+   <span class="o">~</span><span class="n">A</span><span class="p">(){}</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">B</span> <span class="o">:</span> <span class="k">public</span> <span class="n">A</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+   <span class="kt">int</span> <span class="o">*</span><span class="n">data</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+   <span class="n">B</span><span class="p">(){</span>
+      <span class="n">data</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span>
+   <span class="p">};</span>
+   <span class="o">~</span><span class="n">B</span><span class="p">(){</span>
+      <span class="k">delete</span> <span class="n">data</span><span class="p">;</span>
+   <span class="p">};</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+   <span class="n">A</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="k">new</span> <span class="n">B</span><span class="p">();</span> <span class="c1">//Ändra inte den här raden
+</span>   <span class="k">delete</span> <span class="n">b</span><span class="p">;</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>####Svar:</p>
+
+<div class="spoiler">
+Ändra raden:
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="o">~</span><span class="n">A</span><span class="p">(){}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+till
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">virtual</span> <span class="o">~</span><span class="n">A</span><span class="p">(){}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<p>En minnesläcka är inte alltid lätt att hitta, speciellt i större system. Därför är det viktigt att man kontinuerligt kontrollerar efter minnesläckor när man testar sin kod.</p>
+
+<p>Några kanske tänker att en minnesläcka på några bytes inte gör så mycket. 
+Men det räcker att det läcker väldigt lite minne för att problem ska uppstå. 
+Tänk på att en läcka kan upptså flera gånger under en och samma körning!</p>
+
+<p>I standarden för C++11 finns det något som kallas för smarta pekare. 
+De frigör minnet automatiskt när det inte längre behövs.</p>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q12">
+                    <input type="hidden" name="module-id" id="module-id" value="M12">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

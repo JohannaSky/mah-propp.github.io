@@ -1,0 +1,315 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Introduktion to pointers | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/pointers/">Tutorial</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/11560/Pointers-Usage-in-C-Beginners-to-Advanced#2">Pointer usage</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/627/A-Beginner-s-Guide-to-Pointers">Beginner's guide</a></li>
+        
+        <li><a href="https://www.youtube.com/watch?v=m2n-LCb6Cvg">Pointers fun with Binky</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduktion-till-pekare">Introduktion till pekare</h1>
+
+<p>En pekare är ett eget objekt som kan peka på andra objekt.
+Man kan sedan komma åt och redigera värdet på objektet via pekaren.</p>
+
+<p><strong>Syntax</strong>: 
+<code class="highlighter-rouge">&lt;typ&gt;* &lt;namn&gt;</code></p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>	<span class="c1">// define an object (integer) for the pointer to point att
+</span><span class="kt">int</span><span class="o">*</span> <span class="n">iPtr</span><span class="p">;</span>	<span class="c1">// define a pointer with name iPtr.
+</span><span class="n">iPtr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>	<span class="o">//</span> <span class="n">initiate</span> <span class="n">the</span> <span class="n">pointer</span> <span class="p">(</span><span class="n">iPtr</span><span class="p">)</span> <span class="n">withe</span> <span class="n">the</span> <span class="n">adress</span> <span class="n">of</span> <span class="n">i</span><span class="p">.</span> <span class="s">"&amp;"</span> <span class="n">means</span> <span class="s">"take the adress of"</span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>A pointer is defined by putting a pointer before the name of the variable.</p>
+
+<p>In the exampel we have made a pointer that can points to integers - it can’t (normally) point to anything else.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">float</span><span class="o">*</span> <span class="n">cPtr</span><span class="p">;</span>    <span class="o">//</span> <span class="n">a</span> <span class="n">pointer</span> <span class="n">to</span> <span class="n">floating</span> <span class="n">point</span> <span class="n">numbers</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>A pointer can be redirected to point at another object but allways to a compatible type.</p>
+
+<p>To get to the value the pointer points to use the “dereference”-operatorn: “*”</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">a</span><span class="o">=</span><span class="mi">7</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>  <span class="c1">// initierar pekaren direkt.
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>   <span class="c1">// We dereference the pointer to get the number 7 that is written on screen
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span><span class="p">;</span>    <span class="c1">// new we will write out the adress that p is pointing to (0xdc7844) CHECK 
+</span><span class="o">*</span><span class="n">ptr</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>      <span class="c1">// change the value that p pints to
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>	<span class="c1">// we write 20 on screen
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span><span class="p">;</span>      <span class="c1">// we write out 20 on screen
+</span><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">65</span><span class="p">;</span>
+<span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">;</span>       <span class="o">//</span> <span class="n">change</span> <span class="n">opbjet</span> <span class="n">the</span> <span class="n">pointer</span> <span class="n">points</span> <span class="n">to</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Several pointers can point to the same value, so you change the value of what 
+all the objects points to if you change it through one pointer (se example C )</p>
+
+<p><strong>Kodexempel C</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+ 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+     
+    <span class="kt">int</span><span class="o">*</span> <span class="n">iPtr1</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">iPtr2</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+     
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"iPtr1: "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">iPtr1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"iPtr2: "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">iPtr2</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+     
+    <span class="o">*</span><span class="n">iPtr1</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span> <span class="c1">// change value of i throught the pointer iPtr1
+</span>     
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"*iPtr1: "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">iPtr1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"*iPtr2: "</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">iPtr2</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Utskrift</strong></p>
+
+<p class="info">iPtr1: 5<br />
+iPtr2: 5<br />
+*iPtr1: 100<br />
+*iPtr2: 100</p>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+<p>Vad är fel i koden nedan?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="svar">Svar:</h4>
+
+<div class="spoiler">
+en pekare till char kan bara peka på något av typen char (i har typen int)  
+</div>
+
+<h3 id="vningsuppgift-2">Övningsuppgift 2</h3>
+<p>Se koden nedan och tänk efter vad som är fel och vad som kan hända om man exekverar koden.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">anotherPtr</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">anotherPtr</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>####Svar:</p>
+
+<div class="spoiler">
+anotherPtr är inte tilldelad något värde så den kan peka var som helst i minnet.  
+Troligen blir det exekveringsfel när vi försöker hämta innehållet som anotherPtr pekar på.  
+<br /><br />
+</div>
+
+<p>###Övningsuppgift 3
+* Skapa int-pekaren “foo” och int-variablen “bar”. Definiera värdet i bar till 7.
+* Sätt foo att peka på bar.
+* Ändra värdet som foo pekar på till 4.
+* Skriv ut värdet på bar (std::cout « bar;) och observera resultatet.
+* Varför har värdet ändrats?
+* Skriv ut värdet på foo (std::cout « foo;) och observera det.
+* Varför är resultatet inte det samma som på rad 4 och vad betyder det?
+* Skapa nu en ny int-variabel “foobar” och definiera det till 2;
+* Sätt foo att peka på foobar;
+* Skriv ut <strong>värdena</strong> på både bar och det foo pekar på.</p>
+
+<p>####Svar:</p>
+<div class="spoiler">
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">foo</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">bar</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">bar</span><span class="p">;</span>
+<span class="o">*</span><span class="n">foo</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bar</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="c1">//”4”
+</span><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">foo</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="c1">//”pointer-adress. e.g. “0067FD90”
+</span><span class="kt">int</span> <span class="n">foobar</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">foobar</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bar</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">foo</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span> <span class="o">//</span><span class="mi">42</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q3">
+                    <input type="hidden" name="module-id" id="module-id" value="M3">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Intro headerfiler | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.learncpp.com/cpp-tutorial/19-header-files/">header files</a></li>
+        
+        <li><a href="http://www.cplusplus.com/forum/articles/10627/">headers and includes</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduktion-till-headerfiler-h">Introduktion till headerfiler (.h)</h1>
+
+<p>När man strukturerar upp ett program i C++ vill man gärna seperera deklaration/gränssnitt från implementation/definition.
+En anledning är att inte all kod ska hamna i en och samma fil, och en annan anledning för att minska på kodberoenden.
+Finns all kod i samma fil (till exempel main.cpp) behöver man kompilera om hela sitt program efter varje liten förändring.</p>
+
+<p>Ett sätt att dela upp koden i flera olika filer är via header-filer.
+En header-fil kan innehålla en eller flera deklarationer som andra filer kan nyttja.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></td><td class="code"><pre><span class="c1">// --filen my_math.h--
+// endast en deklaration, en beskrivning av en funktion
+// (tar två heltal, returnerar ett annat).
+</span><span class="kt">int</span> <span class="n">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span> 
+ 
+<span class="c1">// --filen my_math.cpp--
+// inkluderar my_math.h för att synliggöra deklaration för Add
+</span><span class="cp">#include "my_math.h"
+</span> 
+<span class="c1">// implementation / definition
+</span><span class="kt">int</span> <span class="n">Add</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span> 
+    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="c1">// --filen another_file.h--
+// endast en deklaration
+</span><span class="kt">void</span> <span class="n">Dummy</span><span class="p">();</span>
+ 
+<span class="c1">// --filen another_file.cpp--
+// inkluderar another_file.h för att synliggöra deklaration för Dummy
+</span><span class="cp">#include "another_file.h"
+</span> 
+<span class="c1">// implementation / definition
+</span><span class="kt">void</span> <span class="n">Dummy</span><span class="p">(){</span>
+<span class="p">}</span>
+ 
+<span class="c1">// --filen main.cpp--
+// inkludera my_math.h i main.cpp för att komma åt funktionen Add(...)
+</span><span class="cp">#include "my_math.h" 
+</span> 
+<span class="c1">// detsamma gäller för Dummy() i filen another_file.h
+</span><span class="cp">#include "another_file.h" 
+</span> 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">Add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span>
+    <span class="n">Dummy</span><span class="p">();</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Som ni ser i kodexempl A ligger deklarationen för funktionen Add i en fil kallad my_math.h (header-fil), medan funktionaliteten ligger i en annan fil, my_math.cpp (källkodsfil).
+Sedan finns även funktionen Dummy, som är deklarerad i another_file.h.</p>
+
+<p>Om man nu skulle ändra i my_math.h eller my_math.cpp behöver vi inte kompilera another_file.cpp, eftersom det inte finns några beroenden mellan my_math och another_file.
+Därav sparar man tid vid kompilering eftersom man endast behöver kompilera om de filer som är ändrade eller beroende av de ändrade filerna.
+Dock är det inte märkbart i det här fallet eftersom det är mycket simpelt exempel.</p>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<p>För att förstå hur header-filer fungerar måste man först tänka på ett par saker.
+Varje gång det står #include “filnamn.h” (ett preprocessor-direktiv) i en fil, “ersätter” kompilatorn raden med innehållet från den angivna header-filen.
+Det innebär att skillnaden mellan en header-fil och en källkodsfil är att header-filen inte kompileras, utan endast inkluderas till en annan header- eller källkodsfil.</p>
+
+<p>I C++ måste allting vara deklarerat innan det används, men det behöver inte vara definierat.</p>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q15">
+                    <input type="hidden" name="module-id" id="module-id" value="M15">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

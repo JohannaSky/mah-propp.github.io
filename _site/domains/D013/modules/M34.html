@@ -1,0 +1,223 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>numbers | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <p>#M34: Datatyper - numeriska</p>
+
+<p>Det finns flera olika nummer-datatyper i C++.
+Typerna kan hålla innehålla värden av olika storlek.
+Man bör välja den typ som passar in bäst i sin kodlösning, till exempel hur stort ska ett värde maximalt kunna bli.
+Ju högre värde desto mer data tar det (men tänk på att inte sub-optimera för mycket).</p>
+
+<p>Här är en lista med de vanligaste typerna i C++.</p>
+
+<p>Heltalstyper, signed (positiva och negativa).
+Man behöver inte skriva ut signed före typen.				(Minst 					-&gt; Max)</p>
+
+<p>signed char			Exakt 1 byte i storlek. Minst 8 bitar.	(-127 					-&gt; 127)
+signed short		Inte mindre än char. Minst 16 bitar.	(-32767 				-&gt; 32767)
+signed int			Inte mindre än short. Minst 16 bitar.	(-2147483647 			-&gt; 2147483647)
+signed long			Inte mindre än int. Minst 32 bitar.		(-2147483647 			-&gt; 2147483647)
+signed long long	Inte mindra än long. Minst 64 bitar. 	(-9223372036854775807 	-&gt; 9223372036854775807)</p>
+
+<p><strong>Heltalstyper, unsigned (positiva)</strong>	<strong>(Minst 	-&gt; Max)</strong></p>
+
+<p>unsigned char								(0 		-&gt; 255)
+unsigned short								(0 		-&gt; 65535)
+unsigned int								(0 		-&gt; 4294967295)
+unsigned long								(0 		-&gt; 4294967295)
+unsigned long long							(0 		-&gt; 18446744073709551615)</p>
+
+<p><strong>Floating-point types</strong>						<strong>(Minst 			-&gt; Max)</strong></p>
+
+<p>float				Vanligast som 32 bitar.			(1.17549e-038 	-&gt; 3.40282e+038)
+double				Inte lägre precision än float	(2.22507e-308 	-&gt; 1.79769e+308)
+long double			Inte lägre precision än double	(2.22507e-308 	-&gt; 1.79769e+308)</p>
+
+<p>###Slumpade heltal</p>
+
+<p>Man kan få fram slumpade tal med hjälp av en pseudo-slumpgenerator (alltså inte riktigt slumpade).</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="cp">#include &lt;cstdlib&gt;
+</span><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="o">//</span> <span class="n">returnerar</span> <span class="n">ett</span> <span class="n">tal</span> <span class="n">mellan</span> <span class="mi">0</span> <span class="n">och</span> <span class="n">RAND_MAX</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Dock kommer r-variabeln ovan alltid att få samma värde tilldelat sig varje gång om man inte gör någonting åt det.
+För att lösa detta kan man använda sig av en så kallad seed som ändrar på de slumpade värdena.
+Ändra seed med hjälp av funktionen srand(…);</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">srand</span><span class="p">(</span><span class="n">seed</span><span class="p">);</span> <span class="o">//</span> <span class="n">som</span> <span class="n">standard</span> <span class="n">anv</span><span class="err">ä</span><span class="n">nds</span> <span class="mi">1</span> <span class="n">som</span> <span class="n">seed</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Använder man samma seed för flera rand(), returnerar funktionen samma värde.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+<span class="kt">int</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="o">//</span> <span class="n">r2</span> <span class="n">kommer</span> <span class="n">att</span> <span class="n">f</span><span class="err">å</span> <span class="n">samma</span> <span class="n">v</span><span class="err">ä</span><span class="n">rde</span> <span class="n">som</span> <span class="n">r1</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det man kan göra för att “samma” nummer inte alltid ska returneras från rand(…) är att använda en seed som beror på tiden.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="cp">#include &lt;ctime&gt;
+</span><span class="n">srand</span><span class="p">((</span><span class="kt">unsigned</span><span class="p">)</span><span class="n">time</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+	
+<span class="kt">int</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+<span class="kt">int</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Variablerna r1 och r2 kommer nu att vara olika.</p>
+
+<p>Vill man slumpa ett värde mellan 0 och 5 kan man använda sig av modulo-operatorn (%).</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">()</span> <span class="o">%</span> <span class="mi">5</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Variabeln r kan nu innehålla 0, 1, 2, 3, och 4.</p>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+
+<p>Ge exempel på tre olika heltalsdatatyper från C++ och beskriv någon viktig skillnaden mellan dem.</p>
+
+<p>####Svar:</p>
+
+<p>short, int, long long.
+De kan hålla värden i olika storlek.</p>
+
+<h3 id="vningsuppgift-2">Övningsuppgift 2</h3>
+
+<p>Vad innebär det att ett heltal är signed eller unsigned?</p>
+
+<p>###Svar:</p>
+
+<p>signed att heltalen både kan vara negativa och positiva medan unsigned endast kan bestå av positiva tal.
+Tips: signed kan innehålla ett tecken (sign), minustecknet.</p>
+
+<h3 id="vningsuppgift-3">Övningsuppgift 3</h3>
+
+<p>Ge exempel på två olika decimaltalsdatatyper från C++.</p>
+
+<p>###Svar:</p>
+
+<p>float, double</p>
+
+
+        
+
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

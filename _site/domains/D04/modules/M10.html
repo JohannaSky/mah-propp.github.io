@@ -1,0 +1,287 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Introduktion till dynamisk minneshantering | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduktion-till-dynamisk-minneshantering">Introduktion till dynamisk minneshantering</h1>
+
+<p>Andra språk (inte alla) har en så kallad garbage collector som frigör minne som inte längre används.
+I C++ måste man mer eller mindre sköta minneshanteringen själv.</p>
+
+<p>Den här delen kommer att ta upp hur man manuellt allokerar och frigör/avallokerar dynamiskt minne i C++.
+Man bör ha fullföljt introduktion till pekare innan man går vidare med den här delen.</p>
+
+<p><strong>Syntax</strong>:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;*</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">=</span> <span class="k">new</span> <span class="o">&lt;</span><span class="n">type</span><span class="o">&gt;</span>  <span class="c1">// allocate dynamic memory for a new object of &lt;type&gt;
+</span><span class="k">delete</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span>                <span class="o">//</span> <span class="n">deallocate</span> <span class="p">(</span><span class="n">free</span><span class="p">)</span> <span class="n">the</span> <span class="n">memory</span> <span class="n">allocated</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">iptr</span><span class="p">;</span>      <span class="c1">// define a pointer
+</span><span class="n">iptr</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span> <span class="o">//</span> <span class="n">allocate</span> <span class="n">memory</span> <span class="k">for</span> <span class="n">an</span> <span class="n">integer</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det är programmerarens ansvar att frigöra minnet för varje objekt som manuellt är allokerat med new-operatorn, 
+och det gör man med hjälp av delete-operatorn (se kodexempel B).</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Car</span><span class="p">()</span> <span class="o">:</span> <span class="n">modelNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">Car</span><span class="p">(</span><span class="kt">int</span> <span class="n">mn</span><span class="p">)</span> <span class="o">:</span> <span class="n">modelNumber</span><span class="p">(</span><span class="n">mn</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="kt">int</span> <span class="n">modelNumber</span><span class="p">;</span>
+<span class="p">};</span>
+ 
+<span class="c1">// allokerar plats för ett bilobjekt,
+</span><span class="n">Car</span><span class="o">*</span> <span class="n">cPtr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>    <span class="c1">// allocate memory for a car
+</span><span class="n">cPtr</span><span class="o">-&gt;</span><span class="n">modelNumber</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>    <span class="c1">// use the Car
+</span><span class="k">delete</span> <span class="n">cPtr</span><span class="p">;</span>        <span class="o">//</span> <span class="n">free</span> <span class="n">meomry</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>If there are no pointer left pointing to a dynamically allocated object, you have lost this memory, 
+it is not possible to free the memory with a delete, this is called a memory leak.
+Memory leaks is very hard to find, normally you only notice them by the program taking up more and more space as it runs.</p>
+
+<p>To make it possible to find memory leaks a program normally deallocate all memory it is using when closing.
+If there is any memory left allocated, you have a memory leak and there exist debugging tools to find out
+what type of object is allocated and where in the program this memory was allocated. 
+This is the reason that most programs ends by deallocating all memory even if it takes up unnecessary execution time to do it
+(there are also historical reasons for deallocation all memory).</p>
+
+<p>Inside the program, deallocated memory can be reused when allocating new memory.
+However, outside the program nothing happens when deallocating memory inside the program, 
+all the memory will be freed when the program close.</p>
+
+<p>Kodexempel C visar hur dynamiska arrayer allokeras och avallokeras.</p>
+
+<p><strong>Kodexempel C</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">Car</span><span class="o">*</span> <span class="n">cars</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Car</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="c1">// allokera plats i minnet för en array med 10 bilar.
+</span><span class="k">delete</span><span class="p">[]</span> <span class="n">cars</span><span class="p">;</span> <span class="o">//</span> <span class="n">anv</span><span class="err">ä</span><span class="n">nd</span> <span class="k">delete</span><span class="p">[]</span> <span class="n">f</span><span class="err">ö</span><span class="n">r</span> <span class="n">att</span> <span class="n">frig</span><span class="err">ö</span><span class="n">ra</span> <span class="n">en</span> <span class="n">dynamiskt</span> <span class="n">allokerad</span> <span class="n">array</span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+<p>Skriv kod för att läsa ett antal siffror och spara dem i en array. 
+Läs först in antalet siffror och allokera minne till en array med rätt storlek. 
+Sedan läsa in siffrorna och spara dem i arrayen. Slutligen frigör minnet för arrayen innan programmet tar slut.</p>
+
+<p>####Svar:</p>
+<div class="spoiler">
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="cp">#include 
+</span><span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"How many numbers? "</span><span class="p">;</span>
+   <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+   <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+   <span class="kt">int</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+   <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="kt">int</span> <span class="n">digit</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"</span><span class="se">\n</span><span class="s">Enter number: "</span><span class="p">;</span>
+      <span class="n">std</span><span class="o">::</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">digit</span><span class="p">;</span>
+      <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">digit</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="k">delete</span><span class="p">[]</span> <span class="n">array</span><span class="p">;</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga-1">Fråga 1</h3>
+
+<p>Vad gör raden?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>Allokerar ett heltal med storlek 8-bitar.</li>
+  <li>Allokerar ett heltal.</li>
+  <li>Allokerar en array med 8 heltal.</li>
+  <li>Allokerar ett heltal som får värdet 8.</li>
+</ol>
+
+<h3 id="frga-2">Fråga 2</h3>
+
+<p>Vad gör raden?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="mi">8</span><span class="p">);</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>Allokerar ett heltal med storlek 8-bitar.</li>
+  <li>Allokerar ett heltal.</li>
+  <li>Allokerar en array med 8 heltal.</li>
+  <li>Allokerar ett heltal som får värdet 8.</li>
+</ol>
+
+<h3 id="frga-3">Fråga 3</h3>
+
+<p>Hur deallokeras minnet till array A?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">MyClass</span><span class="o">*</span> <span class="n">A</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyClass</span><span class="p">[</span><span class="mi">14</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li><code class="highlighter-rouge">delete A;</code></li>
+  <li><code class="highlighter-rouge">delete[] A;</code></li>
+  <li><code class="highlighter-rouge">delete A[];</code></li>
+  <li><code class="highlighter-rouge">delete A[14];</code></li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q10">
+                    <input type="hidden" name="module-id" id="module-id" value="M10">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

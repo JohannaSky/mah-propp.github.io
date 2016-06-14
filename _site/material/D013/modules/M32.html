@@ -1,0 +1,313 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>bool | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="m32-datatype---bool">M32: Datatype - bool</h1>
+
+<p>bool är en inbyggd datatyp som kan ha värdet sant eller falskt.</p>
+
+<p><strong>Definitionsexempel:</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="n">bool</span> <span class="n">v1</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>  <span class="c1">//en bool som är sann
+</span><span class="n">bool</span> <span class="n">v2</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="o">//</span> <span class="n">en</span> <span class="n">bool</span> <span class="n">som</span> <span class="err">ä</span><span class="n">r</span> <span class="n">falsk</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Vilkorsuttryck har typen bool.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">if</span> <span class="p">(</span><span class="n">vilkor</span><span class="p">)</span> <span class="n">sats</span><span class="p">;</span> <span class="o">//</span> <span class="n">en</span> <span class="k">if</span><span class="o">-</span><span class="n">sats</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Om vilkoret är sant så kommer satsen att exekveras.
+Är vilkoret falskt så exekveras inte satsen.</p>
+
+<p>Ett vilkor kan se ut på flera olika sätt och även vara ihopsatt som flera olika vilkor.
+Så länge vilkoret innanför paranteserna stämmer så kommer satsen att exekvera.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="k">if</span> <span class="p">(</span><span class="n">v1</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span> <span class="n">Execute</span><span class="p">();</span> <span class="c1">// Execute kommer att köras eftersom v1 är true.
+</span><span class="k">if</span> <span class="p">(</span><span class="n">v2</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="n">Execute</span><span class="p">();</span> <span class="c1">// Execute kommer att köras eftersom v2 är falskt.
+</span><span class="k">if</span> <span class="p">(</span><span class="n">v2</span> <span class="o">==</span> <span class="n">v1</span><span class="p">)</span> <span class="n">Execute</span><span class="p">();</span> <span class="o">//</span> <span class="n">Execute</span> <span class="n">kommer</span> <span class="n">INTE</span> <span class="n">att</span> <span class="n">k</span><span class="err">ö</span><span class="n">ras</span> <span class="n">eftersom</span> <span class="n">v1</span> <span class="n">och</span> <span class="n">v2</span> <span class="err">ä</span><span class="n">r</span> <span class="n">olika</span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det finns flera jämförelse-operatorer man kan nyttja.</p>
+
+<p>a == b : a detsamma som b
+a != b : a inte lika med b</p>
+
+<p>a &lt; b : a mindre än b
+a &gt; b : a större än b</p>
+
+<p>a &gt;= b : a större eller lika med b
+a &lt;= b : a mindre eller lika med b</p>
+
+<p>##Logiska operatorer</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="o">!</span><span class="nb">false</span> <span class="o">==</span> <span class="nb">true</span> <span class="c1">// uttrycket blir sant eftersom !falskt är detsamma som true. Alltså kan man läsa det som true == true
+</span><span class="o">!</span><span class="nb">true</span> <span class="o">==</span> <span class="nb">false</span> <span class="c1">// detsamma gäller här. !true kan läsas som falskt.
+</span>
+<span class="n">vilkor1</span> <span class="o">&amp;&amp;</span> <span class="n">vilkor2</span> <span class="c1">// vilkor1 OCH vilkor2 ska vara sant för att hela vilkoret ska bli sant
+</span><span class="n">vilkor1</span> <span class="o">||</span> <span class="n">vilkor2</span> <span class="o">//</span> <span class="n">vilkor1</span> <span class="n">ELLER</span> <span class="n">vilkor2</span> <span class="n">ska</span> <span class="n">vara</span> <span class="n">sant</span> <span class="n">f</span><span class="err">ö</span><span class="n">r</span> <span class="n">att</span> <span class="n">hela</span> <span class="n">vilkoret</span> <span class="n">ska</span> <span class="n">bli</span> <span class="n">sant</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>En bool kan konverteras till ett heltal, då blir heltalet 0 om värdet är falskt, annars blir heltalet 1.
+Med andra ord false kan tolkas som 0 och true kan tolkas som 1.</p>
+
+<p>Om man använder postfix- eller prefix-operator (++) kommer variabeln att sättas till sant.
+– fungerar inte på en boolean.</p>
+
+<p>####Tips:</p>
+
+<p>Har man en funktion som returnerar en bool kan man nyttja metoden direkt i ett vilkorsuttryck</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td class="code"><pre><span class="c1">// En simpel funktion som kollar om ett tal är noll
+</span><span class="n">bool</span> <span class="nf">IsZero</span><span class="p">(</span><span class="kt">int</span> <span class="n">val</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">bool</span> <span class="n">isZero</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// anta att val inte är noll
+</span>	<span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+		<span class="n">isZero</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// status blir true om val är noll
+</span>	<span class="k">return</span> <span class="n">isZero</span><span class="p">;</span>		
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">val1</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(),</span> <span class="n">val2</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span> <span class="c1">// två slumpade värden
+</span>	
+	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">IsZero</span><span class="p">(</span><span class="n">val2</span><span class="p">))</span> <span class="c1">// tänk på !
+</span>	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">val1</span> <span class="o">/</span> <span class="n">val2</span><span class="p">;</span> <span class="c1">// dela endast om val2 är annorlunda än 0
+</span>	<span class="p">}</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+
+<p>Vad kan en variabel av typen bool hålla för värden?</p>
+
+<p>####Svar:</p>
+
+<p>True eller false (1 eller 0)</p>
+
+<h3 id="vningsuppgift-2">Övningsuppgift 2</h3>
+
+<p>Vad innebär en vilkorssats?</p>
+
+<p>####Svar:</p>
+
+<p>En sats som endast exekveras om vilkoret är uppfyllt.</p>
+
+<h3 id="vningsuppgift-3">Övningsuppgift 3</h3>
+
+<p>Ge exempel på tre jämförelse-operatorer.</p>
+
+<p>####Svar:</p>
+
+<p>== (är lika med?), != (är annorlunda än?), &lt; (är mindre än?)</p>
+
+<h3 id="vningsuppgift-4">Övningsuppgift 4</h3>
+
+<p>Vad innebär operatorerna || och &amp;&amp;?</p>
+
+<p>####Svar:</p>
+
+<p>|| -&gt; uttrycket före ELLER efter operatorn måste vara sant för att vilkoret ska vara sant.
+Exempel: false || true (uttrycket är sant)</p>
+
+<p>&amp;&amp; -&gt; både uttrycket före OCH efter operatorn måste vara sanna för att vilkoret ska vara sant.
+Exempel: false &amp;&amp; true (uttrycket är falskt)</p>
+
+<h3 id="vningsuppgift-5">Övningsuppgift 5</h3>
+
+<p>Skriv en funktion som jämför om två heltal har samma värde.
+Nyttja sedan funktionen i en if-sats och skriv ut om de är sanna eller ej.</p>
+
+<p>####Svar:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></td><td class="code"><pre>	
+<span class="n">bool</span> <span class="nf">IsEqual</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">bool</span> <span class="n">isEqual</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span>
+		<span class="n">isEqual</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+	<span class="k">return</span> <span class="n">isEqual</span><span class="p">;</span>
+<span class="p">}</span>
+			
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+				
+	<span class="k">if</span> <span class="p">(</span><span class="n">IsEqual</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"SAMMA"</span><span class="p">;</span>
+	<span class="p">}</span>
+	<span class="k">else</span>
+	<span class="p">{</span>
+		<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"INTE SAMMA"</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+        
+
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

@@ -1,0 +1,260 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Mer om dynamisk minneshantering | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/dynamic/">Dynamic memory</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="mer-om-dynamisk-minneshantering">Mer om dynamisk minneshantering</h1>
+
+<p>Dynamiskt minne används ofta när man inte är säker på hur mycket minne man behöver, man allokerar alltså så mycket som behövs efter att programmet startat (kodexempel A).</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">TVSeries</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">TVSeries</span><span class="p">()</span> <span class="o">:</span> <span class="n">numEpisodes</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">TVSeries</span><span class="p">(</span><span class="kt">int</span> <span class="n">ne</span><span class="p">)</span> <span class="o">:</span> <span class="n">numEpisodes</span><span class="p">(</span><span class="n">ne</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="kt">int</span> <span class="n">numEpisodes</span><span class="p">;</span>
+<span class="p">};</span>
+ 
+<span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Number of episodes?"</span> <span class="o">&lt;&lt;</span> <span class="n">eoln</span><span class="p">;</span>
+<span class="n">size</span> <span class="o">&lt;&lt;</span> <span class="n">cin</span><span class="p">;</span>	<span class="c1">// read size from consol input
+</span><span class="n">TVSeries</span><span class="o">*</span> <span class="n">tv_series</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TVSeries</span><span class="p">[</span><span class="n">size</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det går även bra att nyttja det om man vill dela data mellan flera olika funktioner/programdelar (kodexempel B).</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="c1">// allokera minne med hjälp av new-operatorn i en funktion.
+// returnera sedan pekaren från funktionen.
+</span><span class="n">TVSeries</span><span class="o">*</span> <span class="n">Good</span><span class="p">(){</span>
+    <span class="n">TVSeries</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TVSeries</span><span class="p">(</span><span class="mi">62</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="n">TVSeries</span><span class="o">*</span> <span class="n">breakingBad</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+ 
+    <span class="n">breakingBad</span> <span class="o">=</span> <span class="n">Good</span><span class="p">();</span>
+ 
+    <span class="k">delete</span> <span class="n">breakingBad</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift">Övningsuppgift</h3>
+<p>Laga fel i följande kod:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">A</span> <span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+<span class="k">public</span><span class="o">:</span>
+   <span class="n">A</span><span class="p">(){}</span>
+   <span class="o">~</span><span class="n">A</span><span class="p">(){}</span>
+<span class="p">};</span>
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+   <span class="n">A</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="k">new</span> <span class="n">A</span><span class="p">[</span><span class="mi">7</span><span class="p">];</span>
+   <span class="cm">/* do something */</span>
+   <span class="k">delete</span> <span class="n">array</span><span class="p">;</span>
+   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>####Svar:</p>
+
+<div class="spoiler">
+Ändra raden:
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">delete</span> <span class="n">array</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+till
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">delete</span><span class="p">[]</span> <span class="n">array</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<p>Det kan finnas flera olika programdelar som nyttjar samma minne samtidigt.
+Då är det viktigt att komma ihåg att man endast ska frigöra minnet när ingen av delarna använder minnet längre.
+Skulle minne frigöras när någon annan fortfarande använder det kommer det att uppstå problem, som till exempel att programmet kraschar.</p>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q11">
+                    <input type="hidden" name="module-id" id="module-id" value="M11">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

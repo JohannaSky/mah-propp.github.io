@@ -1,0 +1,352 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>klasstemplates | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <p>#Introduktion till klasstemplates</p>
+
+<p>En klass-template kan ses som en ritning för att generera flera olika klasser.</p>
+
+<p>Kodexempel A visar hur man kan deklarera en klass-template med namnet Item.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><pre>    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Item</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Item</span><span class="p">()</span> <span class="o">:</span> <span class="n">data</span><span class="p">(</span><span class="n">T</span><span class="p">()){}</span>
+ 
+    <span class="kt">void</span> <span class="n">set_data</span><span class="p">(</span><span class="n">T</span> <span class="n">data</span><span class="p">){</span>
+        <span class="n">data_</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+    <span class="n">T</span> <span class="n">get_data</span><span class="p">()</span> <span class="k">const</span><span class="p">{</span>
+        <span class="k">return</span> <span class="n">data_</span><span class="p">;</span>
+    <span class="p">}</span>
+     
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">T</span> <span class="n">data_</span><span class="p">;</span>
+<span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Man kan byta ut ordet typename mot class om man vill. 
+Rad 1 i kodexempel A skulle då ha sett ut:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>För att instansiera en template-klass måste man explicit skriva vilken template typ som ska skickas in. 
+Det gör man genom att skriva typen mellan två vinkelparanteser &lt;&gt;. Se kodexempel B.</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="n">Item</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">i_item</span><span class="p">;</span>
+<span class="n">i_item</span><span class="p">.</span><span class="n">set_data</span><span class="p">(</span><span class="mi">120</span><span class="p">);</span>
+<span class="n">i_item</span><span class="p">.</span><span class="n">get_data</span><span class="p">();</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det finns inget gemensamt mellan flera instansieringar av en klass-template med olika datatyper. 
+Se kodexempel C.</p>
+
+<p><strong>Kodexempel C</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td><td class="code"><pre><span class="n">Item</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">f_item</span><span class="p">;</span>
+<span class="n">Item</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">i_item</span><span class="p">;</span>
+ 
+<span class="c1">// FEL
+</span><span class="n">i_item</span> <span class="o">=</span> <span class="n">f_item</span><span class="p">;</span>
+ 
+<span class="c1">// f_item och i_timer är inte kompatibla med varandra.
+// kompilatorn ser de som helt olika klasser.
+</span> 
+<span class="n">Item</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">i_item2</span><span class="p">;</span>
+ 
+<span class="c1">// OK
+</span><span class="n">i_item</span> <span class="o">=</span> <span class="n">i_item2</span><span class="p">;</span>
+<span class="o">//</span> <span class="n">i_item</span> <span class="n">och</span> <span class="n">i_item2</span> <span class="err">ä</span><span class="n">r</span> <span class="n">kompatibla</span> <span class="n">med</span> <span class="n">varandra</span> <span class="n">eftersom</span> <span class="n">de</span> <span class="err">ä</span><span class="n">r</span> <span class="n">av</span> <span class="n">samma</span> <span class="n">typ</span><span class="p">.</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Det går även att ha flera template-typer i en och samma klass (se kodexempel D)</p>
+
+<p><strong>Kodexempel D</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T1</span><span class="p">,</span> <span class="k">typename</span> <span class="n">T2</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">TwoTypes</span><span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">T1</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">T2</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">};</span> 
+ 
+<span class="n">TwoTypes</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">float</span><span class="o">&gt;</span> <span class="n">two_types</span><span class="p">;</span>
+<span class="n">two_types</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="n">two_types</span><span class="p">.</span><span class="n">b</span> <span class="o">=</span> <span class="mf">6.5</span><span class="n">f</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift">Övningsuppgift</h3>
+
+<p>Datastrukturen kö håller en sekvens av objekt där nya objekt sätts in vid slutet och tas ut vid början. 
+En enkel kö har operationerna push (sätt in), pop (ta bort) och front (returnerar elementet i början av kön), 
+samt empty för att kontrollera om det finns någonting i kön. 
+Skriv en enkel templated Queue-klass med hjälp av standardbibliotekets std::vector enligt följande:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre></td><td class="code"><pre><span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">Queue</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">queue</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Queue</span><span class="p">();</span>
+    <span class="n">bool</span> <span class="n">empty</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="n">push</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">item</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="n">pop</span><span class="p">();</span>
+    <span class="n">T</span> <span class="o">&amp;</span><span class="n">front</span><span class="p">();</span>
+<span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>####Svar:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="cp">#pragma once
+#include &lt;vector&gt;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Referens-variabeln refVal deklareras och definieras på följande sätt:
+int i = 3;
+int&amp; refVal = i;</p>
+
+<p>Vilken eller vilka av följande operationer är korrekta?</p>
+
+<ol class="alternatives">
+  <li>int&amp; x = refVal;</li>
+  <li>int* x = refVal;</li>
+  <li>int* x = &amp;refVal;</li>
+  <li>int x = &amp;refVal;</li>
+  <li>int x = refVal;</li>
+</ol>
+
+<h3 id="frga-1">Fråga</h3>
+
+<p>Följande funktion returnerar en referens till en sträng:</p>
+
+<p>std::string&amp; GetName()
+{
+	std::string name = “Larry”;
+	return name;
+}</p>
+
+<p>Vad blir resultatet om du tilldelar en sträng med funktionen, och varför?
+(std::string myString = GetName(); )</p>
+
+<ol class="alternatives">
+  <li>””</li>
+  <li>“Larry”</li>
+  <li>Koden skapar en exception då minnet inte går att läsa. Detta är för att strängen skapad i funktionen inte längre existerar när funktionen går ut ur scope.</li>
+  <li>Strängen som skapas i funktionen existerar bara under tiden funktionen körs och därför returnerar funktionen NULL.</li>
+</ol>
+
+<h3 id="frga-2">Fråga</h3>
+
+<p>3)	Följande kodsnutt är given:</p>
+
+<p>int main()
+{
+	int a = 2;
+	int b = 7;
+	MyFunc(a, b);
+	return 0;
+}</p>
+
+<p>void MyFunc(int&amp; a, int b)
+{
+	int c = 10;
+	b = c;
+	a = c + b;
+	b = 5;
+}</p>
+
+<p>Vad har a och b för värden efter att funktionen körts?</p>
+
+<ol class="alternatives">
+  <li>a=20, b=7</li>
+  <li>a=21, b=7</li>
+  <li>a=20, b=8</li>
+  <li>a=21, b=8</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q29">
+                    <input type="hidden" name="module-id" id="module-id" value="M29">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

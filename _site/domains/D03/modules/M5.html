@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Nollpekare | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/pointers/">Tutorial</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/11560/Pointers-Usage-in-C-Beginners-to-Advanced#2">Pointer usage</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/627/A-Beginner-s-Guide-to-Pointers">Beginner's guide</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="nullpointers">Nullpointers</h1>
+
+<p>All pointervariables have a special value “nullptr” meaning that this pointer is not pointing att anything.
+This is to make it possible to check if a pointer is pointing at something or at nothing.
+But if a pointer variable is not initiated it will have an <strong>undefined</strong> value and if used the program will normally crash.
+If you try to dereference a nullptr the program will also crash but the difference is that it is possible to check if the pointer has a nullptr value or not.</p>
+
+<p>Note: You should use “nullptr” to test if a pointer has a “nullptr” value but from historical reasons it is common to see “NULL”, “null” or “0” used instead.</p>
+
+<p>One programmingstyle is to allways set a pointer to nullptr in the declaration.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></td><td class="code"><pre>    <span class="kt">void</span> <span class="n">CheckPtr</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span> <span class="n">ptr</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">){</span> <span class="c1">// if ptr is a null pointer exit
+</span>        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+    <span class="c1">// otherwise ptr points to something so we can increas it by two
+</span>    <span class="o">*</span><span class="n">ptr</span> <span class="o">+=</span> <span class="mf">2.0</span><span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="c1">// Set the float pointer to null in the declaration, no possibilty for errors!
+</span>    <span class="kt">float</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+    <span class="c1">// You can also write 0 or NULL but use nullptr (C++11-standard).
+</span> 
+    <span class="n">CheckPtr</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span> <span class="c1">// ptr is sent in with null as value, nothing happens
+</span> 
+    <span class="kt">float</span> <span class="n">f</span> <span class="o">=</span> <span class="mf">5.0</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">ptr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">;</span>
+    <span class="n">CheckPtr</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>  <span class="c1">//now ptr points to f and f will be increased by 2.0f
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+<p>Vad skrivs ut till konsolfönstret av följande kod?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">nullptr</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ptr</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h4 id="svar">Svar:</h4>
+<p class="spoiler">Probably the result was something like “0x000000” since nullptr normally has value 0</p>
+
+<h3 id="vningsuppgift-2">Övningsuppgift 2</h3>
+<p>Vad skrivs ut till konsolfönstret av följande kod?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">another_ptr</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">another_ptr</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p class="spoiler">####Svar:
+Probably the program crashed since the pointer was not initiated!</p>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<p>a pointer value can be treated as a boolean, it will then evaluate to false if it is the null pointer and true otherwise.</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td class="code"><pre><span class="c1">// Instead of:
+</span><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>
+<span class="c1">// you can write:
+</span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">ptr</span><span class="p">)</span>
+
+<span class="c1">// Insted of:
+</span><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span> <span class="o">!=</span> <span class="n">nullptr</span><span class="p">)</span>
+<span class="c1">// you can write:
+</span><span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q5">
+                    <input type="hidden" name="module-id" id="module-id" value="M5">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

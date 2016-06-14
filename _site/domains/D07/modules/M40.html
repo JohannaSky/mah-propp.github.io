@@ -1,0 +1,254 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Skriva och läsa filer | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/files/">Input/output with files</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <p>#Skriva och läsa filer</p>
+
+<p>C++ tillhandahåller följande klasser för input/output till/från en fil.</p>
+
+<p>Varje klass strömmar tecken till och/eller från en fil.</p>
+
+<ul>
+  <li>
+    <p>ofstream 	-&gt; klass för att skriva till fil</p>
+  </li>
+  <li>
+    <p>ifsteam	 	-&gt; klass för att läsa från fil</p>
+  </li>
+  <li>
+    <p>fstream 	-&gt; klass för både läsa/skriva till/från fil</p>
+  </li>
+</ul>
+
+<p>Dessa klasser är härledda från istream- och ostream-klasserna.
+Som läsare har man kanske redan använt objket från dessa klasser tidigare, cin och cout (används oftast för att skriva till ett konsollfönster).
+cin är av typen isteam och cout av typen ostream.</p>
+
+<p>Det som måste göras är att associera dessa strömmar med en eller flera fysiska filer.</p>
+
+<p><strong>Kodexempel A: skriva till fil</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+	<span class="n">ofstream</span> <span class="n">myfile</span><span class="p">;</span> <span class="c1">// ofstream för skriva till fil
+</span>	<span class="n">myfile</span><span class="p">.</span><span class="n">open</span> <span class="p">(</span><span class="s">"exempel.txt"</span><span class="p">);</span>
+	<span class="n">myfile</span> <span class="o">&lt;&lt;</span> <span class="s">"Writing this to a file.</span><span class="se">\n</span><span class="s">"</span><span class="p">;</span>
+	<span class="n">myfile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>I exemplet öppnar man filen myfile (i minnet) och döper den till “exempel.txt”.
+När filen sedan är öppnad kan man skriva till den via «, precis som man gör med cout.</p>
+
+<p>När man är klar så ska man stänga filen så att operativsystemet vet att man kan nyttja minnet igen.</p>
+
+<p>Strömobjeket (ofstream myfile) kan dock fortfarande öppna en annan fil och bearbeta den.
+Skulle man inte stänga strömmen och strömobjektet förstörs kallas automatiskt close-metoden för strömobjektet.</p>
+
+<p>När man öppnar en fil kan man definera med hjälp av ett par flaggor beteendet av hur man kan bearbeta filen.
+Till exempel att det endast gå att läsa från filen:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="n">ios</span><span class="o">::</span><span class="n">out</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Se <a href="http://www.cplusplus.com/doc/tutorial/files/">länk</a> för fler flaggor</p>
+
+<p><strong>Kodexempel B: läsa från fil</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+</span>	<span class="cp">#include &lt;fstream&gt;
+</span>	<span class="cp">#include &lt;string&gt;
+</span>	<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+	<span class="kt">int</span> <span class="nf">main</span> <span class="p">()</span> <span class="p">{</span>
+		<span class="n">string</span> <span class="n">line</span><span class="p">;</span>
+		<span class="n">ifstream</span> <span class="n">myfile</span> <span class="p">(</span><span class="s">"example.txt"</span><span class="p">);</span> <span class="c1">// ifstream för läsa från fil
+</span>		<span class="k">if</span> <span class="p">(</span><span class="n">myfile</span><span class="p">.</span><span class="n">is_open</span><span class="p">())</span> <span class="c1">// is_open används för att se om filen gick att öppna (om filen existerar etc.)
+</span>		<span class="p">{</span>
+			<span class="k">while</span> <span class="p">(</span> <span class="n">getline</span> <span class="p">(</span><span class="n">myfile</span><span class="p">,</span><span class="n">line</span><span class="p">)</span> <span class="p">)</span>
+			<span class="p">{</span>
+				<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">line</span> <span class="o">&lt;&lt;</span> <span class="sc">'\n'</span><span class="p">;</span>
+			<span class="p">}</span>
+			<span class="n">myfile</span><span class="p">.</span><span class="n">close</span><span class="p">();</span>
+		<span class="p">}</span>
+		<span class="k">else</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Unable to open file"</span><span class="p">;</span> 
+
+		<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q40">
+                    <input type="hidden" name="module-id" id="module-id" value="M40">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

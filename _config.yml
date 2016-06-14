@@ -1,0 +1,53 @@
+# Configuration
+# ===============
+
+# Page name
+name: Mah ProPP
+
+# Description of the page/course
+description: "Prova på programmering för nya studenter"
+
+# Github repository hosting this page/course
+github: https://github.com/mah-propp/mah-propp.github.io
+
+# Google analytics
+# analytics: UA-48530327-4
+# ex. GitHub pages URL
+url: http://mah-propp.github.io/
+
+# Already set as defaults in jekyll > 2.4.x
+# highlighter: pygments
+# markdown: kramdown
+# include: ['.htaccess']
+
+# Default layouts for posts and pages
+defaults:
+  -
+    scope: 
+      path: "material"
+    values:
+      layout: "material"
+
+# SASS partial directory and output parameters
+sass:
+  sass_dir: _sass
+  style: :compressed
+
+# Use RSS?
+rss: false
+
+# Files to be excluded (feel free to exclude files like: search.json, rss.xml, humans.txt, etc.)
+exclude: [
+    'Gemfile',
+    'Gemfile.lock',
+    'README.md',
+    'LICENSE.txt',
+    'node_modules',
+    'webpack.config.js',
+    'vendor',
+    'webpack.config.js',
+    'webpack.config.prod.js',
+    'package.json'
+]
+
+encoding: utf-8

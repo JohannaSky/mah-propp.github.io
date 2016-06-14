@@ -1,0 +1,34 @@
+{
+  "name": "propp",
+  "version": "0.1.0",
+  "description": "GitHub Pages for the ProPP project",
+  "main": "./assets/app/index.js",
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js webpack -p --config webpack.config.prod.js",
+    "watch": "./node_modules/webpack/bin/webpack.js --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mah-propp/mah-propp.github.io.git"
+  },
+  "author": "Sebastian Bengtegård",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mah-propp/mah-propp.github.io/issues"
+  },
+  "homepage": "https://github.com/mah-propp/mah-propp.github.io#readme",
+  "dependencies": {
+    "isomorphic-fetch": "^2.2.1",
+    "pubsub-js": "^1.5.3",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-1": "^6.5.0",
+    "webpack": "^1.13.1"
+  }
+}

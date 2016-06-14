@@ -1,0 +1,14 @@
+<div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    {% if page.links %}
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        {% for link in page.links %}
+        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>

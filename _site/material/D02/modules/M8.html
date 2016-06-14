@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Introduktion till klasser | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/classes/">Classes (I)</a></li>
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/templates/">Classes (II)</a></li>
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/classes2/">Special members</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduktion-till-klasser">Introduktion till klasser</h1>
+
+<p>En klass fungerar på liknande sätt i C++ som i andra språk. 
+Det finns dock några saker som är värda att nämna.</p>
+
+<p>Kodexempel A visar med ett enkelt exempel hur man kan definera en klass.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">Car</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span> <span class="c1">// modelNumber blir privat
+</span>    <span class="kt">int</span> <span class="n">modelNumber</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Car</span><span class="p">()</span> <span class="o">:</span> <span class="n">modelNumber</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="kt">void</span> <span class="n">SetModelNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">){</span> <span class="c1">// this only declare the function the definition is further down after the class declaration
+</span>        <span class="n">modelNumber</span> <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">GetModelNumber</span><span class="p">();</span> <span class="c1">// this both declare and definies the function
+</span><span class="p">};</span> <span class="c1">// dont forget ; after class declaration!
+</span>
+    <span class="kt">void</span> <span class="n">Car</span><span class="o">::</span><span class="n">SetModelNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">number</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// now we definie the function
+</span>        <span class="n">modelNumber</span> <span class="o">=</span> <span class="n">number</span><span class="p">;</span>
+    <span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>En klass med namnet Car har definerats, vilket man kan se som en ritning över hur objekt av 
+typen Car konstrueras.
+Observe how you can split a method in two parts, the declaration written inside the class declaration and 
+the definition written afterwards. Which class the method definition belongs to is defined by writing “Car::” before the method name.</p>
+
+<p>När man definerar en klass kommer alla medlemmar bli privata om inte annat anges.
+Ska någonting kunna nyttjas utanför klassen måste man det definieras som public (se kodexempel A).
+I C++ som många andra OO-språk finns private, public och protected som alternativa åtkomstnivåer.</p>
+
+<p>Klassen innehåller det privata heltalet modelNumber som endast kan nyttjas i klassen, 
+samt den publika konstruktorn (speciell metod som används vid konstruktion av nya objekt av typen Car) Car()
+samt funktionen GetModelNumber för att kunna läsa av modelnummret.</p>
+
+<p>En konstruktor fungera i princip som i andra OO-språk - har samma namn som klassen, har ingen returtyp,
+kan både ha tom parameterlista och funktionskropp, som i kodexempel A.</p>
+
+<h2 id="initieringslista">Initieringslista</h2>
+
+<p>I C++ initierar man normal medlemsvariabler genom att skriva dem i <strong>initieringslistan</strong>
+som kommer direkt efter huvudet i deklarationen av konstruktor.
+I exempel A så är det “ : modelNumber(0) “ vilket initierar modelNumber med 0.</p>
+
+<p>A function is normally declared inside the class declaration but defined after the class declarations as we have done with SetModelNumber. 
+It is also possible to both declare and define function in the class declaration as SetModelNumber here.</p>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Om inget annat specificeras är fälten i en klass.</p>
+
+<ol class="alternatives">
+  <li>public</li>
+  <li>private</li>
+  <li>protected</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q8">
+                    <input type="hidden" name="module-id" id="module-id" value="M8">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>dubbeldefinition | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="dubbeldefinition-och-header-guards">Dubbeldefinition och header guards</h1>
+
+<p>Det kan uppstå problem om en header-fil redan finns inkluderad och man försöker inkluderar den igen.
+Problemen uppstår när något är definierat och defineras ännu en gång.</p>
+
+<p>Kodexempel A tydliggör vad som menas</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="c1">// --car.h--
+</span><span class="k">class</span> <span class="nc">Car</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Car</span><span class="p">();</span>
+<span class="p">};</span>
+ 
+ 
+<span class="c1">// --main.cpp--
+// car.h inkluderas en första gång.
+</span><span class="cp">#include "car.h"
+</span> 
+<span class="c1">// car.h inkluderas en andra gång och ett fel uppstår (type redefinition),
+// eftersom klassen Car redan är definerad sedan tidigare.
+</span><span class="cp">#include "car.h"</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Exemplet är väldigt förenklat eftersom man förmodligen inte inkluderar två filer på det sättet efter varandra. 
+Men car.h kanske inkluderas i main.cpp och i en annan fil garage.h, samtidigt som garage.h också inkluderas i main.cpp. 
+Det innebär att klassen Car redan finnas definerad i garage.h och samma problem uppstår.</p>
+
+<p>Ett sådant problemen kan man lösa med hjälp av att lägga till en header guard längst upp i en header-fil.
+Vilket gör att en och samma header-fil endast inkluderas en gång inom samma definitionsområde.</p>
+
+<p>Som header guard kan man antingen använda #ifndef (manuellt) eller #pragma once (kompilatorn löser det).
+Kodexempel B illustrerar med #ifndef och kodexempel C med #pragma once.</p>
+
+<p><strong>Kodexempel B: #ifndef</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</pre></td><td class="code"><pre><span class="c1">// --car.h--
+</span> 
+<span class="c1">// om CAR_H_ inte är definerat...
+</span><span class="cp">#ifndef CAR_H_
+</span> 
+<span class="c1">// ...definera CAR_H_
+</span><span class="cp">#define CAR_H_ 
+</span> 
+<span class="k">class</span> <span class="nc">C</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">C</span><span class="p">();</span>
+<span class="p">};</span>
+ 
+<span class="c1">// här slutar definitionen för CAR_H_
+</span><span class="cp">#endif 
+</span> 
+ 
+<span class="c1">// --main.cpp--
+</span> 
+<span class="c1">// CAR_H_ definieras eftersom den inte är det tidigare
+</span><span class="cp">#include "car.h"
+</span> 
+<span class="c1">// CAR_H_ är redan definierad, hoppa över inkluderingen         
+</span><span class="cp">#include "car.h"</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><strong>Kodexempel C: #pragma once</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="c1">// --car.h--
+</span><span class="cp">#pragma once
+</span> 
+<span class="k">class</span> <span class="nc">Car</span>
+<span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">Car</span><span class="p">();</span>
+<span class="p">};</span>
+ 
+ 
+<span class="c1">// --main.cpp--
+</span><span class="cp">#include "car.h"
+</span> 
+<span class="c1">// car.h är redan inkluderar, hoppa över inkluderingen          
+</span><span class="cp">#include "car.h"</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="kommentar">Kommentar</h3>
+
+<p>Det kan saknas stöd för #pragma once i äldre kompilatorer.</p>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga">Fråga</h3>
+
+<p>Har du förstått innehållet i modulen?</p>
+
+<ol class="alternatives">
+  <li>Ja</li>
+  <li>Nej</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q17">
+                    <input type="hidden" name="module-id" id="module-id" value="M17">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

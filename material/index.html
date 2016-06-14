@@ -1,0 +1,15 @@
+---
+layout: standard
+---
+
+<h1 class="course-list-header">Material</h1>
+
+<div class="row">
+    <ul class="material-list">
+        {% for m in site.data.material %}
+        <li class="material-item">
+            <a class="material-link" href="/material/{{ m.id }}">{{ m.name }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

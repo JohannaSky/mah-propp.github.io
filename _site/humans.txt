@@ -1,0 +1,17 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+   
+   Olle Lindeberg
+   Site: 
+   Github: 
+   Twitter: 
+   Location: 
+   
+   Jeanette Eriksson
+   Site: 
+   Github: 
+   Twitter: 
+   Location: 
+   

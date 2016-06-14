@@ -1,0 +1,286 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>intro static c-arrays | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="introduction-to-static-c-arrays">Introduction to static c-arrays</h1>
+
+<p>A static array is used when the size is decidid already before the execution.</p>
+
+<p><strong>Syntax</strong>: 
+<code class="highlighter-rouge">&lt;typ&gt; &lt;namn&gt;[&lt;storlek&gt;];</code></p>
+
+<p>I kodexempel A definieras en array med plats för fem heltal.
+Värdet som bestämmer storleken på arrayen måste vara ett konstant värde.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="k">const</span> <span class="kt">int</span> <span class="n">kSize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="n">kSize</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Man kommer åt varje element i en array genom att använda hakparanteser [], och ett indexvärde för ett specifikt element.
+Kodexempel B nyttjar hakparanteserna och initerar varje element i arrayen med ett heltal.</p>
+
+<p><strong>Kodexempel B</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5</pre></td><td class="code"><pre><span class="k">const</span> <span class="kt">int</span> <span class="n">kSize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="n">kSize</span><span class="p">];</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Var uppmärksam på att c-arrayer använder ett så kallat noll-index, vilket innebär att första elementet ligger på plats 0.</p>
+
+<p>Man får manuellt hålla reda på man använder ett index som ligger innanför arrayen. 
+Skulle man försöka skriva eller läsa utanför arryen, finns det en risk att programmet kraschar.</p>
+
+<p><strong>Kodexempel C</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</pre></td><td class="code"><pre><span class="cp">#include &lt;iostream&gt;
+</span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+
+<span class="k">const</span> <span class="kt">int</span> <span class="n">kSize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">values</span><span class="p">[</span><span class="n">kSize</span><span class="p">];</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="n">values</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">eoln</span><span class="p">;</span> <span class="c1">// writes 7
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">values</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">eoln</span><span class="p">;</span> <span class="c1">// undefined what it writes, values[1] its not initialized
+</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">eoln</span><span class="p">;</span> <span class="c1">// may crash, undefined what it writes, index is out of range!
+</span><span class="n">values</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>     <span class="c1">// This may crash!
+</span>                   <span class="c1">// Even if it don't crash imidiatly we have written on a unknown place
+</span>                   <span class="o">//</span> <span class="n">anything</span> <span class="n">may</span> <span class="n">happen</span> <span class="n">later</span> <span class="n">in</span> <span class="n">the</span> <span class="n">program</span> <span class="n">execution</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+<p>Skapa en statisk array av heltal med följande innehåll: 1, 23, 43, 2, 65</p>
+
+<p>####Svar:</p>
+<div class="spoiler">
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">array</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">43</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">65</span><span class="p">};</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+<p>###Övningsuppgift 2
+Deklarera vaiabeln “value” och tilldela den värdet 43 genom att plocka ut värdet från arrayen.</p>
+
+<p>####Svar:</p>
+<div class="spoiler">
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="n">array</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+</div>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga-1">Fråga 1</h3>
+
+<p class="alternatives">Hur många element innehåller arrayen  <code class="highlighter-rouge">int array[11]</code>
+1. 9
+2. 10
+3. 11
+4. 12</p>
+
+<h3 id="frga-2">Fråga 2</h3>
+
+<p>Vad innebär det att en array är “zero-based”?</p>
+
+<ol class="alternatives">
+  <li>Att första elementet indexeras med index 0.</li>
+  <li>att arrayens storlek är 0</li>
+  <li>att arrayen endast innehåller 0:or</li>
+  <li>inget av alternativen stämmer</li>
+</ol>
+
+<h3 id="frga-3">Fråga 3</h3>
+
+<p>Vilket värde returnerar funktionen?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">MyFunc</span><span class="p">()</span>
+<span class="p">{</span>
+	<span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+	<span class="kt">int</span> <span class="n">array</span><span class="p">[];</span>
+	<span class="n">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="n">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+	<span class="n">array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="n">array</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+	
+	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="n">sum</span> <span class="o">+=</span> <span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>0</li>
+  <li>6</li>
+  <li>10</li>
+  <li>Koden kompilerar inte.</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q18">
+                    <input type="hidden" name="module-id" id="module-id" value="M18">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

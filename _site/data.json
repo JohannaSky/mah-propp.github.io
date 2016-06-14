@@ -1,0 +1,68 @@
+{
+    "material": [
+        
+        {
+            "id": "M1",
+            "name": "Introduktion",
+            "quiz": "Q1"
+        },
+        
+        {
+            "id": "M2",
+            "name": "Installation av programvara",
+            "quiz": "Q1"
+        },
+        
+        {
+            "id": "M3",
+            "name": "Grundläggande begrepp",
+            "quiz": "Q1"
+        },
+        
+        {
+            "id": "M4",
+            "name": "Konsollprogrammering",
+            "quiz": "Q1"
+        },
+        
+        {
+            "id": "M5",
+            "name": "Eventbaserad programmering",
+            "quiz": "Q1"
+        },
+        
+        {
+            "id": "M6",
+            "name": "Spelprogrammering",
+            "quiz": "Q1"
+        }
+        
+    ],
+    "answers": [
+        
+        
+        {
+            "id": "Q1",
+            "level": 100,
+            "answers": [
+                
+                {
+                    "type": "radio",
+                    "correct": "c"
+                },
+                
+                {
+                    "type": "radio",
+                    "correct": "d"
+                },
+                
+                {
+                    "type": "radio",
+                    "correct": "b"
+                }
+                
+            ]
+        }
+        
+    ]
+}

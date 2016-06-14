@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>char | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="m33-datatyper---char">M33: Datatyper - char</h1>
+
+<p>En variabel av typen char kan hålla ett tecken.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1</pre></td><td class="code"><pre>   <span class="kt">char</span> <span class="n">ch</span> <span class="o">=</span> <span class="sc">'a'</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Ofast består en char av 8 bitar, vilket innebär att den kan ha 256 olika värden (tecken). Dessa tecken finns i så kallade teckenuppsättningar.
+Det finns olika teckenuppsättningar, och ASCII-tabellen (en vanlig teckenuppsättning) är en av dem, dock saknar ASCII-tabellen många tecken som kan finnas i flera andra språk än engelskan.</p>
+
+<p>Varje tecken-konstant är ett heltal. Till exempel ‘b’ har värdet 98 i ASCII-tabellen.
+Man kan få ut heltalsvärdet från ett tecken genom att använda notationen int(c), där c är en char.</p>
+
+<p>En char kan både vara signed (negativa och positiva tal) och unsigned (positiva tal, 0 - 255).
+Är en char unsigned tolkas värdena mellan 0 - 255 och är den signed tolkas värdena mellan -127 och 127.
+Som tur är ligger de flesta värdena mellan 0 till 127, där de mestt vanliga tecken också ligger (inte svenska tecken).</p>
+
+<p>Typen wchar_t (wide char) stödjer tecken från stora teckenuppsättningar, som till exempel Unicode.
+Namnet kommer från programmeringsspråket C där wchar_t är en typedef istället för en inbyggd typ. _t laddes till för att särskilja att det var en standard typedef.</p>
+
+<p>Teckentyperna stödjer aritmiska och logiska operationer.</p>
+
+<p><strong>Teckentyper</strong>
+char	    Exakt 1 byte i storlek. Minst 8 bitar.
+char16_t	Inte mindre än char. Minst 16 bitar.
+char32_t	Inte minte än char16_t. Minst 32 bitar.
+wchar_t	    Kan representera den största teckenuppsättningen som stöds.</p>
+
+<h3 id="vningsuppgift-1">Övningsuppgift 1</h3>
+
+<p>Vad kan en variabel av typen char innehålla?</p>
+
+<p>####Svar:</p>
+
+<p>Ett tecken.</p>
+
+<h3 id="vningsuppgift-2">Övningsuppgift 2</h3>
+
+<p>Vad är skillnaden mellan typerna char och wchar_t?</p>
+
+<p>####Svar:</p>
+
+<p>char kan endast innehålla ett “vanligt” tecken (engelska alfabetet plus en del andra tecken som +, - etc. se ASCII).</p>
+
+<p>wchar_t är en större datatyp som kan hålla ett tecken från flera olika språk (tecken från de största teckenuppsättningarna, t.ex. kinesiska tecken).</p>
+
+<h3 id="vningsuppgift-3">Övningsuppgift 3</h3>
+
+<p>Vilka heltalsvärde kan en char innehålla?</p>
+
+<p>####Svar:</p>
+
+<p>En char kan innehålla värden mellan 0 - 255 (unsigned) eller -127 - 127 (signed).</p>
+
+<h3 id="vningsuppgift-4">Övningsuppgift 4</h3>
+
+<p>Vilket värde har bokstaven p?</p>
+
+<p>####Svar: 
+112 (hur kan man veta det?)</p>
+
+        
+
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

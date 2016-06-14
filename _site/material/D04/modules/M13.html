@@ -1,0 +1,350 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>Stack och heap | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.learncpp.com/cpp-tutorial/79-the-stack-and-the-heap/">Stack och heap</a></li>
+        
+        <li><a href="http://duartes.org/gustavo/blog/post/anatomy-of-a-program-in-memory/">Ett programs anatomi</a></li>
+        
+        <li><a href="http://www.google.se">Hitta själv</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="stack-och-heap">Stack och heap</h1>
+
+<p>Den här delen kommer att övergripande gå igenom hur ett program nyttjar minne.</p>
+
+<p>Ett typiskt program delar upp minnesanvändningen mellan flera olika segment:</p>
+
+<p><img src="../../../../../images/minne.png" alt="minne" /></p>
+
+<p>En del personer brukar använda ordet Data-segment som samlingsnamn för både Heap och Data tillsammans.</p>
+
+<p>##The Stack eller Call Stack</p>
+
+<p>Stacken består av en eller flera “stack frames” som kan innehålla lokala variabler och funktionsparametrar.</p>
+
+<p>För varje nytt funktions- eller metodanrop läggs det till en ny “stack frame” i stacken. 
+Det vill säga att alla lokala variabler och parametrar som tillhör just den funktionen hamnar längst upp i stacken, 
+och de går att använda så länge funktionen exekverar.</p>
+
+<p>Vad som händer när man går ut ur funktionen är att den “stack frame” som ligger längst upp (senast inlagd) tas bort. 
+Man har alltså inte längre tillgång till de lokala variablerna eller parametrarna som användes i funktionen.</p>
+
+<p>Man kan endast lägga till nya “stack frames” längs upp, och samtidigt endast ta bort det som ligger överst. 
+Stacken nyttjar alltså “sist in först ut”-strukturen, vilket man brukar kallar LIFO (Last In First Out).</p>
+
+<p>Exempel A (exempelkod med figur) visar hur en stack ändras mellan flera funktionsanrop.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td><td class="code"><pre><span class="kt">void</span> <span class="n">Func2</span><span class="p">(</span><span class="kt">int</span> <span class="n">c</span><span class="p">){</span>
+    <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="n">Func1</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">Func2</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+ 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">Func1</span><span class="p">();</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p><img src="../../../../../images/minne2.png" alt="minne" /></p>
+
+<p>##The Heap, också kallad Free Store</p>
+
+<p>Man kan se Heapen som ett stor minneslager man har möjlighet att låna minne ifrån under körning av ett program. 
+Det är här dynamiska minnesallokerade variabler lagras; allokering sker med new-operatorn.</p>
+
+<p>Så länge det finns minne kvar i lagret går det att låna mer. 
+Det är datatypen för variabeln som bestämmer hur mycket minne man får tillgång till. 
+Man måste dock komma ihåg att lämna tillbaka det man lånat! Vilket man gör med delete-operatorn.</p>
+
+<p>Man kommer åt det allokerade minnet via ett pekarobjekt, som sparar undan adressen till den lånade minnesplatsen.</p>
+
+<p><img src="../../../../../images/minne2.png" alt="minne" /></p>
+
+<p>##Data segment</p>
+
+<p>I Data-segmentet lagras statiska och globala variabler.</p>
+
+<p>##Code segment</p>
+
+<p>Här lagras read-only strängar, till exempel string litterals.</p>
+
+<p>Förutom read-only strängar finns här även programmets kod/instruktioner.</p>
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga-1">Fråga 1</h3>
+
+<p>Vad händer när följande kod körs?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">Func</span><span class="p">(){</span>
+ 	<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+ 	<span class="k">return</span> <span class="o">&amp;</span><span class="n">n</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Func</span><span class="p">();</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>Kompilerar inte.</li>
+  <li>Siffran 8 skrivs ut.</li>
+  <li>Resultatet är odefinierat.</li>
+  <li>Siffran 0 skrivs ut</li>
+</ol>
+
+<h3 id="frga-2">Fråga 2</h3>
+
+<p>Vad händer när följande kod körs?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</pre></td><td class="code"><pre><span class="k">class</span> <span class="nc">A</span><span class="p">{</span>
+<span class="k">private</span><span class="o">:</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">n</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+	<span class="n">A</span><span class="p">()</span> <span class="p">{</span> <span class="n">n</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="p">;</span> <span class="o">*</span><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="p">}</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">GetNPointer</span><span class="p">(){</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">int</span><span class="o">*</span> <span class="n">Func</span><span class="p">(){</span>
+ 	<span class="n">A</span> <span class="n">a</span><span class="p">;</span>
+ 	<span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">GetNPointer</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+	<span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="n">Func</span><span class="p">();</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>Kompilerar inte.</li>
+  <li>Siffran 5 skrivs ut.</li>
+  <li>Resultatet är odefinierad.</li>
+  <li>Siffran 0 skrivs ut</li>
+</ol>
+
+<h3 id="frga-3">Fråga 3</h3>
+
+<p>Allokerar new minne på heapen eller stacken?</p>
+
+<ol class="alternatives">
+  <li>heapen.</li>
+  <li>stacken</li>
+  <li>Det beror på hur man använder new</li>
+  <li>inget av ovanstående alternativ stämmer.</li>
+</ol>
+
+<h3 id="frga-4">Fråga 4</h3>
+<p>I följande kod, var allokeras minne till variabeln a?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3</pre></td><td class="code"><pre><span class="kt">void</span> <span class="n">Func</span><span class="p">(){</span>
+	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>heapen.</li>
+  <li>stacken</li>
+  <li>Det beror på hur man använder new</li>
+  <li>inget av ovanstående alternativ stämmer.</li>
+</ol>
+
+<h3 id="frga-5">Fråga 5</h3>
+
+<p>Vilket värde innehåller variabeln n efter följande kod körs?</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+ 	<span class="n">n</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>6</li>
+  <li>11</li>
+  <li>5</li>
+  <li>0</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q13">
+                    <input type="hidden" name="module-id" id="module-id" value="M13">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+

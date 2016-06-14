@@ -1,0 +1,251 @@
+<!doctype html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    
+	<title>More about pointers | Mah ProPP</title>
+    
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Mah ProPP">
+
+    <!-- Icons
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="touch-icon-ipad-retina.png">
+    <link rel="apple-touch-startup-image" href="/startup.png">
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    -->
+
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600|Lato|Inconsolata" rel="stylesheet" type="text/css">
+    <link href="/assets/css/main.css" rel="stylesheet">
+
+    
+
+    
+</head>
+
+    <body class="module ">
+        <header id="header" class="header">
+<div class="header-inner">
+    <a class="brand" href="/" title="Gå till startsidan">Mah ProPP</a>
+
+    <ul class="navigation">
+        <li><a href="/domains" title="Gå till alla områden">Områden</a></li>
+        <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+        <li><a href="/path/profile.html" title="Din profil">Profil</a></li>
+        <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+    </ul>
+</div>
+</header>
+
+        <div id="sidebar" class="sidebar">
+    <div id="toggle-sidebar" class="toggle-sidebar">...</div>
+
+    
+    <h5 class="sidebar-links-header">Externa länkar</h5>
+    <ul class="external-links">
+        
+        <li><a href="http://www.cplusplus.com/doc/tutorial/pointers/">Tutorial</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/11560/Pointers-Usage-in-C-Beginners-to-Advanced#2">Pointer usage</a></li>
+        
+        <li><a href="http://www.codeproject.com/Articles/627/A-Beginner-s-Guide-to-Pointers">Beginner's guide</a></li>
+        
+    </ul>
+    
+
+    
+
+    <div class="progress-links" id="app-sidebar"></div>
+</div>
+
+        <div class="up">
+    <a href="#">&uarr;</a>
+</div>
+
+
+        <div class="content" id="content">
+        
+            <h1 id="more-about-pointers">More about pointers</h1>
+
+<p>Pointers can be used as parameters (argument) to a function to give the function access to the object - 
+and not to a copy of it.</p>
+
+<p><strong>Kodexempel A</strong></p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</pre></td><td class="code"><pre>    <span class="kt">void</span> <span class="n">SetValueToSeven</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">){</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">void</span> <span class="n">SetValueToNine</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">pi</span><span class="p">){</span>
+    <span class="o">*</span><span class="n">pi</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="p">}</span>
+ 
+<span class="kt">int</span> <span class="n">main</span><span class="p">(){</span>
+    <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+ 
+    <span class="n">SetValueToSeven</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>  <span class="c1">// argument is a copy
+</span>                             <span class="c1">// value is still o
+</span>    <span class="n">SetValueToNine</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">);</span>  <span class="c1">// argument is a pointer and "value" will change
+</span>                             <span class="c1">// value is 9
+</span><span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Skillnanden mellan funktionsparametrarna är pekartecknet (*).
+Med andra ord vill SetValueToSeven ha ett heltalsobjekt och SetValueToNine vill ha en pekare till ett heltal.</p>
+
+<p>Första funktionen kopierar value och lägger det i ett nytt heltal (i).
+Det innebär att rad två i kodexemplet inte utförs på value, utan på en kopia av value.</p>
+
+<p>SetValueToNine vill ha en pekare till ett heltal, i exemplet blir det minnesadressen till value.
+Sedan avrefereras pi för att man ska kunna ändra på heltalsobjektet, som i det här fallet är just value.</p>
+
+<p>##Pekare till pekare</p>
+
+<iframe width="710" height="450" src="//www.youtube.com/embed/d3kd5KbGB48" frameborder="0" allowfullscreen=""></iframe>
+
+
+        
+
+        
+            <div id="quiz-container">
+                <form action="" method="post" id="quiz-form">
+                    
+                    <h2 id="quiz">Quiz</h2>
+
+<h3 id="frga-1">Fråga 1</h3>
+
+<p>Följande är givet:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</pre></td><td class="code"><pre><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+ 	<span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">stringPointer</span> <span class="o">=</span> <span class="k">new</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">();</span>
+	<span class="n">GetString</span><span class="p">(</span><span class="n">stringPointer</span><span class="p">);</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">stringPointer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">GetString</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">myString</span> <span class="o">=</span> <span class="err">“</span><span class="n">Im</span> <span class="n">a</span> <span class="n">string</span><span class="o">!</span><span class="err">”</span><span class="p">;</span>
+	<span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">myString</span><span class="p">;</span>
+<span class="p">}</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<p>Vilket eller vilka av följande är sant:</p>
+
+<ol class="alternatives multiple">
+  <li>Utskriften blir: <code class="highlighter-rouge">Im a string!</code>`.</li>
+  <li>Utskriften blir: ``.</li>
+  <li>Utskriften blir addressen till stringPointer.</li>
+  <li>Värdet stringPointer pekar på är <code class="highlighter-rouge">Im a string!</code>.</li>
+  <li>Värdet stringPointer pekar på är ``.</li>
+</ol>
+
+<h3 id="frga-2">Fråga 2</h3>
+
+<p>Vad är <em>p</em> i följande kodsnutt:</p>
+
+<figure class="highlight"><pre><code class="language-c--" data-lang="c++"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2</pre></td><td class="code"><pre><span class="kt">int</span><span class="o">*</span> <span class="n">i</span><span class="p">;</span>
+<span class="kt">int</span><span class="o">**</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
+
+<ol class="alternatives">
+  <li>En pekare</li>
+  <li>En pekare som pekar på en pekare.</li>
+  <li>En adress till en pekare</li>
+  <li>En pekare till ett heltal</li>
+</ol>
+
+                    <input type="hidden" name="quiz-id" id="quiz-id" value="Q4">
+                    <input type="hidden" name="module-id" id="module-id" value="M04">
+                    <p id="quiz-message"></p>
+                    <button type="submit" id="submit-quiz" class="submit-quiz-form">Skicka svar</button>
+                </form>
+            </div>
+        
+
+        <footer class="contribute">
+    <p>Har du upptäckt ett fel eller vill bidra med förslag till ändringar? <a href="https://github.com/mah-propp/mah-propp.github.io/pulls" target="_blank" title="Gå till GitHub">Skicka en pull request på GitHub</a>!</p>
+</footer>
+
+        </div>
+
+        <footer class="footer">
+    <div class="footer-inner">
+        <p class="license">
+            Användning av allt material är fritt, om motsatsen inte anges. Formellt utrycks detta med licensen <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" title="Gå till Creative Commons license">Creative Commons Attribution 4.0</a>.
+        </p>
+        <p class="fork">
+            Detta projekt är publicerat som <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">öppen källkod på GitHub</a>. Föreslå gärna ändringar och bidra med förbättringar genom att göra en <a href="https://github.com/mah-propp/mah-propp.github.io" target="_blank" title="Gå till GitHub">fork av detta projekt på GitHub</a>.
+        </p>
+        <ul class="footer-links">
+            <li><a href="/domains" title="Gå till alla domäner">Domäner</a></li>
+            <li><a href="/path" title="Skapa din egen väg">Skapa din väg</a></li>
+            <li><a href="/domains/overview.html" title="Din profil">Profil</a></li>
+            <li><a href="/contact" title="Gå till kontaktsidan">Kontakt</a></li>
+        </ul>
+	<ul class="footer-links-misc">
+            <li><a href="https://github.com/mah-propp/mah-propp.github.io" title="Gå till github repositoriet">GitHub</a></li>
+            
+	</ul>
+    </div>
+</footer>
+
+<!-- Only shown on iOS standalone web apps -->
+<div class="web-app-nav-container">
+    <ul class="web-app-subnav">
+        <li id="web-app-prev">&larr;</li>
+        <li id="web-app-next">&rarr;</li>
+        <li id="web-app-top">&uarr;</li>
+        <li id="web-app-sidebar">&hellip;</li>
+    </ul>
+</div>
+
+<script src="/assets/js/qwest.min.js"></script>
+<script src="/assets/js/react.min.js"></script>
+
+
+
+<script src="/assets/js/bundle.js"></script>
+
+
+
+    </body>
+</html>
+
